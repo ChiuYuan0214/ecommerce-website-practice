@@ -1,0 +1,116 @@
+.header {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: orange;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+.logo {
+  margin: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(90, 8, 90);
+}
+
+.navbar {
+  position: absolute;
+  z-index: 1000;
+  top: 40px;
+  right: 40px;
+  display: none;
+  background-color: rgb(97, 94, 94);
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.show {
+  display: block;
+  opacity: 1;
+  animation-name: fade-in;
+  animation-duration: 0.4s;
+}
+
+.navbar li {
+  display: block;
+  border-bottom: 1px solid rgb(70, 68, 69);
+}
+
+.navbar a {
+  color: white;
+  opacity: 0.5;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+a.btn {
+  opacity: 1;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 759px) {
+  .navbar li:not(:first-of-type) {
+    padding-top: 0.8rem;
+  }
+}
+
+@media (min-width: 760px) {
+  .navbar {
+    display: block;
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+  }
+
+  .navbar ul {
+    flex-direction: row;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .navbar li {
+    display: block;
+    margin: 0 1rem;
+    border-bottom: 0px solid transparent;
+  }
+
+  .navbar a {
+    color: black;
+    font-size: 1rem;
+  }
+
+  a.btn {
+    color: rgb(141, 17, 17);
+  }
+}

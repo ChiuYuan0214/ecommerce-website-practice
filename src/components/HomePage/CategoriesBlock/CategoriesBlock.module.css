@@ -1,0 +1,88 @@
+.card {
+  background-color: white;
+  border-radius: 4px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.card h2 {
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.3rem;
+  color: rgb(146, 98, 7);
+}
+
+.btnBoard {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: auto;
+  min-height: 50px;
+  padding: 0;
+}
+
+.btnBoard li {
+  margin: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btnBoard button {
+  background-color: rgb(100, 88, 88);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.prodList {
+  list-style-type: none;
+  display: block;
+  padding: 0;
+}
+
+.prodList li {
+  display: inline-block;
+  margin: 0.3rem;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 0.5rem;
+  animation-name: fade-in;
+}
+
+.prodList h3 {
+  margin: 0;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 600px) {
+  .card h2 {
+    margin: 1rem;
+  }
+
+  .btnBoard li {
+    margin: 1rem;
+  }
+
+  .btnBoard button {
+    font-size: 1.5rem;
+  }
+
+  .prodList li {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: .75rem;
+  }
+}

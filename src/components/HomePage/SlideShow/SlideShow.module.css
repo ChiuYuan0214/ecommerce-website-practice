@@ -1,0 +1,127 @@
+.container {
+  display: flex;
+  position: relative;
+  z-index: 0;
+  max-height: 50vh;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.previous,
+.next {
+  font-size: 2rem;
+  font-weight: 800;
+  color: black;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.previous {
+  left: 1rem;
+  top: 45%;
+}
+
+.next {
+  right: 1.2rem;
+  top: 45%;
+}
+
+.previous::after,
+.next::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  background-color: rgba(100, 100, 100, 0.7);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.previous::after {
+  left: -72%;
+  top: -2%;
+}
+
+.next::after {
+  left: -100%;
+  top: -2%;
+}
+
+.slide {
+  width: 100%;
+  display: none;
+  opacity: 0;
+}
+
+.show {
+  display: block;
+  opacity: 1;
+  animation-name: fade-in;
+  animation-duration: 0.7s;
+}
+
+.slide img {
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  height: 70%;
+}
+
+.slide > div {
+  height: 30%;
+  background-color: white;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.desc {
+  width: 70%;
+}
+
+.desc h2 {
+  font-size: 1.2rem;
+}
+
+.desc p {
+  font-size: 0.7rem;
+}
+
+.desc h2,
+.desc p {
+  margin: 0 0 0.5rem 0;
+  display: block;
+}
+
+.favorite {
+  position: relative;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* .isFav {
+  background-color: rgb(201, 32, 60);
+} */
+
+@keyframes fade-in {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 760px) {
+.desc h2 {
+  font-size: 2rem;
+}
+.desc p {
+  font-size: 1rem;
+}
+}

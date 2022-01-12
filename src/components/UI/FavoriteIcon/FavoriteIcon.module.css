@@ -1,0 +1,32 @@
+.icon {
+    position: absolute;
+    background-color: grey;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: rotate(-45deg);
+}
+
+.icon::after,
+.icon::before {
+    content: '';
+    position: absolute;   
+    background-color: inherit;
+    width: inherit;
+    height: inherit;
+    border-radius: 50% 50% 0 0;   
+}
+
+.icon::before {
+    top: 0rem;
+    left: 1rem;
+    transform: rotate(90deg);
+}
+
+.icon::after {
+    top: -1rem;
+    left: 0rem;
+}
+
+.isFav {
+    background-color: pink;
+}

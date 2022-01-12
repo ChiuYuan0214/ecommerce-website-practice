@@ -1,0 +1,24 @@
+.toggle {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    border-top: 7px solid rgb(54, 53, 53);
+    border-bottom: 7px solid rgb(54, 53, 53);
+    margin-right: 20px;
+    background-color: transparent;
+}
+
+.toggle::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    width: 35px;
+    height: 7px;
+    background-color: rgb(54, 53, 53);
+}
+
+@media(min-width: 760px) {
+    .toggle {
+        display: none;
+    }
+}
