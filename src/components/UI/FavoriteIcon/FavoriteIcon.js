@@ -4,7 +4,7 @@ const FavoriteIcon = (props) => {
     const iconClass = `${styles.icon} ${props.isFav ? styles.isFav : null}`;
 
     return (
-        <div className={iconClass}></div>
+        <div className={iconClass} onClick={props.onClick}></div>
     );
 };
 

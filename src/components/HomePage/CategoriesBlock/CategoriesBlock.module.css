@@ -54,6 +54,12 @@
   animation-name: fade-in;
 }
 
+.prodList li:hover,
+.prodList li:active {
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
+}
+
 .prodList h3 {
   margin: 0;
 }

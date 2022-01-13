@@ -1,0 +1,158 @@
+.path {
+    display: inline-block;
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+    font-weight: 600;
+    font-size: .9rem;
+    margin: 0 0 1rem .5rem;
+}
+
+.path:hover,
+.path:active {
+    color: rgb(129, 25, 25);
+    transition: color .5s;
+}
+
+
+.card {
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.card img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+    max-width: 100%;
+    max-height: 50vh;
+}
+
+.card h2 {
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+.desc {
+    font-size: .9rem;
+    text-align: left;
+}
+
+.flex {
+    display: flex;
+}
+
+.price {
+    display: block;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: left;
+    margin: .7rem 0;
+}
+
+.originalPrice {
+    font-size: .8rem;
+    text-align: left;
+    text-decoration: line-through;
+    margin: .3rem 0;
+}
+
+.onSale {
+    text-align: left;
+    font-size: 1rem;
+    margin-top: .3rem;
+    color:rgb(129, 25, 25);
+}
+
+.priceBox span {
+    display: block;
+    text-align: left;
+    font-size: .7rem;
+    font-weight: bold;
+    color:rgb(129, 25, 25);
+}
+
+.priceBox {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.actions {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: right;
+}
+
+.favorite {
+    position: relative;
+    right: -4rem;
+    top: -5rem;
+}
+
+.actions button {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    padding: .5rem;
+    background-color: rgb(240, 105, 105);
+    font-size: 1.3rem;
+    color: white;
+}
+
+
+@media (min-width: 730px) {
+
+    .desc {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .flex {
+        height: 10vh;
+    }
+
+    .priceBox {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-start;
+        margin: 0 auto;
+    }
+
+    .originalPrice {
+        font-size: 1rem;
+        margin: 0 1rem 0 0;
+    }
+
+    .price {
+        font-size: 2rem;
+    }
+
+    .onSale {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .priceBox span {
+        margin-left: .5rem;
+    }
+
+    .actions {
+        flex-direction: row;
+        align-items: bottom;
+    }
+
+    .favorite {
+        top: 1.5rem;
+        left: -5rem;
+    }
+
+    .actions button {
+        padding: .5rem 1rem;
+    }
+}
