@@ -1,8 +1,9 @@
 .form {
     width: 100%;
+    max-width: 500px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    margin: 0 auto;
 }
 
 .form label,
@@ -20,8 +21,8 @@
     color:rgba(17, 7, 7, 0.787);
 }
 
-.form input {
-    width: 35vw;
+.input {
+    width: calc(100% - 5.5rem);
     min-width: 13rem;
     height: 2rem;
     outline: none;
@@ -44,4 +45,19 @@
 .form button:hover {
     background-color: rgb(180, 22, 22);
     transition: background-color .3s ease-in;
+}
+
+.errorInput {
+    border: 1px solid red;
+    background-color: pink;
+}
+
+.error {
+    width: 100%;
+}
+
+.error p {
+    font-size: .3rem;
+    color: rgb(163, 13, 13);
+    margin: .3rem 0 0 .3rem;
 }

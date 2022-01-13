@@ -1,8 +1,8 @@
 .icon {
   position: absolute;
   background-color: grey;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.05rem;
+  height: 1.05rem;
   transform: rotate(-45deg);
   box-shadow: inset 8px 0 8px -8px rgba(50, 50, 50, 0.26),
     inset 0 -8px 8px -8px rgba(50, 50, 50, 0.26);
@@ -20,14 +20,14 @@
 
 .icon::before {
   top: 0rem;
-  left: 1rem;
+  left: 0.7rem;
   transform: rotate(90deg);
   box-shadow: inset 0px 8px 8px -8px rgba(50, 50, 50, 0.26),
     inset -8px 0 8px -8px rgba(50, 50, 50, 0.26);
 }
 
 .icon::after {
-  top: -1rem;
+  top: -0.7rem;
   left: 0rem;
   box-shadow: inset 0px 8px 8px -8px rgba(50, 50, 50, 0.26),
     inset 8px 0 8px -8px rgba(50, 50, 50, 0.26);
