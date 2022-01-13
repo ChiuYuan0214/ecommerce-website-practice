@@ -1,68 +1,78 @@
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 1rem;
-    width: 100%;
-    padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 2rem;
+  background: linear-gradient(
+    40deg,
+    rgb(149, 5, 5) 0%,
+    rgb(160, 65, 9) 30%,
+    rgb(107, 41, 15) 50%,
+    rgb(192, 94, 14) 70%,
+    rgb(107, 57, 15) 100%
+  );
 }
 
 .card {
-    display: block;
-    width: auto;
-    max-height: 30vh;
-    height: auto;
-    background-color: white;
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  display: block;
+  width: auto;
+  max-height: 30vh;
+  height: auto;
+  background-color: white;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .card img {
-    object-fit: cover;
-    max-width: 100%;
-    height: 80%;
-    display: block;
-    margin: 0 auto;
+  object-fit: cover;
+  max-width: 100%;
+  height: 80%;
+  display: block;
+  margin: 0 auto;
 }
 
 .icon {
-    position: absolute;
-    display: block;
-    z-index: 10;
-    top: .1rem;
-    left: .5rem;
-    font-size: .5rem;
+  position: absolute;
+  display: block;
+  z-index: 10;
+  top: -0.3rem;
+  left: 0.5rem;
+  font-size: 0.3rem;
+  text-align: center;
 }
 
 .icon span {
-    font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .icon::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: -1.75rem;
-    left: -2.25rem;
-    width: 5rem;
-    height: 5rem;
-    background-color: rgb(238, 238, 59);
-    border-radius: 50%;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -2.1rem;
+  left: -2.6rem;
+  width: 4.75rem;
+  height: 4.75rem;
+  background-color: rgb(238, 238, 59);
+  border-radius: 50%;
 }
 
 .desc {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    width: 100%;
-    height: 20%;
-    background-color: rgb(209, 202, 202);
-    padding: .5rem;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  width: 100%;
+  height: 20%;
+  background-color: rgb(209, 202, 202);
+  padding: 0.5rem;
 }
 
 .desc h3,
 .desc p {
-    margin: 0 0 0 auto;
-    font-size: .75rem;
+  margin: 0 0 0 auto;
+  font-size: 0.75rem;
 }
