@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "./SearchBar.module.css";
 
 const SearchBar = (props) => {
-  const { startSearch } = props;
+  const { startSearch, cate, cancelCate } = props;
   const items = useSelector((state) => state.prod.items);
   const [error, setError] = useState(false);
   const [input, setInput] = useState("");
@@ -20,6 +20,7 @@ const SearchBar = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    cancelCate();
     const inputValue = inputRef.current.value.trim();
     if (inputValue === '') {
       setError(true);
@@ -32,7 +33,14 @@ const SearchBar = (props) => {
         searchWord.test(item.category) === true
     );
     startSearch(searchList);
+    setInput('');
   };
+
+  useEffect(() => {
+    if (cate) {
+      setError(false);
+    }
+  }, [cate]);
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>

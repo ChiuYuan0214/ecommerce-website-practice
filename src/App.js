@@ -20,7 +20,7 @@ function App() {
   };
   return (
     <>
-      {cartIsOpen && <ShoppingCart />}
+      {cartIsOpen && <ShoppingCart toggleCart={toggleCartHandler} />}
       <Header toggleCart={toggleCartHandler} />
       <main className={styles.main}>
         <Routes>

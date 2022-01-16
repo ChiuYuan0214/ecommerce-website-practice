@@ -1,0 +1,28 @@
+.board {
+  width: 100%;
+  max-width: 800px;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.26);
+}
+
+.cate {
+  display: inline-block;
+  list-style-type: none;
+  text-decoration: none;
+  color: black;
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem;
+  border-bottom: 2px solid red;
+}
+
+.cate:not(:first-of-type) {
+  margin-left: 1rem;
+}
+
+@media (min-width: 800px) {
+  .board {
+    border-radius: 4px;
+  }
+}

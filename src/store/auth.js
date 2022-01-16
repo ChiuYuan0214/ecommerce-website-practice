@@ -5,14 +5,16 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-    name: 'authentication',
-    initialState,
+  name: "authentication",
+  initialState,
+  reducers: {
     login: (state) => {
-        state.isAuth = true;
+      state.isAuth = true;
     },
-    logout: state => {
-        state.isAuth = false;
-    }
+    logout: (state) => {
+      state.isAuth = false;
+    },
+  },
 });
 
 export const authActions = authSlice.actions;

@@ -1,8 +1,19 @@
 .board {
   width: 100%;
   background-color: white;
-  border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
   list-style-type: none;
   padding: .5rem;
+  margin: 0 auto;
+}
+
+.board h1 {
+  text-align: center;
+}
+
+@media (min-width: 760px) {
+  .board {
+    width: 800px;
+    border-radius: 4px;
+  }
 }

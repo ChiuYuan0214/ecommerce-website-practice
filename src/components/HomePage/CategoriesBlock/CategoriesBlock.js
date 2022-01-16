@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./CategoriesBlock.module.css";
 
@@ -7,6 +8,8 @@ const CategoriesBlock = () => {
   const items = useSelector((state) => state.prod.items);
   const cateList = useSelector((state) => state.prod.categories);
   const [cate, setCate] = useState(null);
+  const listRef = useRef();
+  const navigate = useNavigate();
 
   const setCateHandler = (title) => {
     if (cate === title) {
@@ -17,7 +20,9 @@ const CategoriesBlock = () => {
 
   const btnList = cateList.map((cate) => (
     <li key={cate}>
-      <button onMouseEnter={setCateHandler.bind(null, cate)}>
+      <button onMouseEnter={() => {
+        setCateHandler(cate);
+      }}>
         {cate.toUpperCase()}
       </button>
     </li>
@@ -27,7 +32,7 @@ const CategoriesBlock = () => {
 
   const ProductList = () => {
     return (
-      <ul className={styles.prodList}>
+      <ul className={styles.prodList} ref={listRef}>
         {filteredList.map((item, index) => (
           <li
             key={item.id}
@@ -35,6 +40,7 @@ const CategoriesBlock = () => {
             style={{
               animationDuration: `${1 + index * 0.3}s`,
             }}
+            onClick={() => navigate(`/${item.id}`)}
           >
             <h3>#{item.title}</h3>
           </li>
@@ -42,6 +48,12 @@ const CategoriesBlock = () => {
       </ul>
     );
   };
+
+  useEffect(() => {
+    if (cate) {
+      listRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [cate]);
 
   return (
     <section className={styles.card}>

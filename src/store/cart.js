@@ -7,23 +7,30 @@ const initialState = {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  addItem: (state, action) => {
-    const updatedItemIndex = state.cartItems.findIndex(
-      (item) => item.id === action.payload.id
-    );
-    if (updatedItemIndex >= 0) {
-      state.cartItems[updatedItemIndex].amount += action.payload.amount;
-    } else {
-      state = [...state, action.payload];
-    }
-  },
-  removeItem: (state, action) => {
-    const updatedItemIndex = state.cartItems.findIndex(
-      (item) => item.id === action.payload
-    );
-    if (updatedItemIndex) {
-      state.cartItems[updatedItemIndex].amount--;
-    }
+  reducers: {
+    addItem: (state, action) => {
+      const updatedItemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (updatedItemIndex >= 0) {
+        state.cartItems[updatedItemIndex].amount += action.payload.amount;
+      } else {
+        state.cartItems = [...state.cartItems, action.payload];
+      }
+    },
+    removeItem: (state, action) => {
+      const updatedItemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
+      const updatedAmount = state.cartItems[updatedItemIndex].amount - 1;
+      if (updatedItemIndex >= 0) {
+        if (updatedAmount === 0) {
+          state.cartItems.splice(updatedItemIndex, 1);
+        } else {
+          state.cartItems[updatedItemIndex].amount--;
+        }
+      }
+    },
   },
 });
 

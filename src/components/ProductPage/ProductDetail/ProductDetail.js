@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { prodActions } from "../../../store/products";
+import { cartActions } from '../../../store/cart';
 
 import FavoriteIcon from "../../UI/FavoriteIcon/FavoriteIcon";
 
@@ -18,6 +19,14 @@ const ProductDetail = ({ product }) => {
 
   const setIsFavHandler = () => {
       dispatch(prodActions.setIsFav(product.id));
+  };
+
+  const addItemHandler = () => {
+    dispatch(cartActions.addItem({
+      id: product.id,
+      price: product.price,
+      amount: 1
+    }));
   };
 
   return (
@@ -46,7 +55,7 @@ const ProductDetail = ({ product }) => {
             <div className={styles.favorite}>
               <FavoriteIcon isFav={product.isFav} onClick={setIsFavHandler} />
             </div>
-            <button>Add to Cart</button>
+            <button onClick={addItemHandler}>Add to Cart</button>
           </div>
         </div>
       </section>
