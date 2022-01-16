@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { prodActions } from "../../../store/products";
@@ -9,6 +10,7 @@ import styles from "./ProductDetail.module.css";
 
 const ProductDetail = ({ product }) => {
   const dispatch = useDispatch();
+  const [bump, setBump] = useState(false);
 
   const discount = product.discount;
   let price = product.price;
@@ -27,7 +29,18 @@ const ProductDetail = ({ product }) => {
       price: product.price,
       amount: 1
     }));
+    setBump(true);
   };
+
+  useEffect(() => {
+    if (!bump) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      setBump(false);
+    }, 300);
+    return () => { clearTimeout(timer); };
+  }, [bump]);
 
   return (
     <>
@@ -55,7 +68,7 @@ const ProductDetail = ({ product }) => {
             <div className={styles.favorite}>
               <FavoriteIcon isFav={product.isFav} onClick={setIsFavHandler} />
             </div>
-            <button onClick={addItemHandler}>Add to Cart</button>
+            <button className={bump ? styles.bump : null} onClick={addItemHandler}>Add to Cart</button>
           </div>
         </div>
       </section>

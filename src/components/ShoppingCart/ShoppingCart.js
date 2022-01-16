@@ -12,28 +12,32 @@ import styles from "./ShoppingCart.module.css";
 const ShoppingCart = ({ toggleCart }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const products = useSelector(state => state.prod.items);
+  const products = useSelector((state) => state.prod.items);
+
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   const navigate = useNavigate();
 
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.price * item.amount,
-    0
-  );
+  const totalPrice = cartItems.reduce((sum, item) => {
+    let discount = products.find((prod) => prod.id === item.id).discount;
+    if (!discount) {
+      discount = 1;
+    }
+    return sum + item.price * item.amount * discount;
+  }, 0);
 
   const addItemHandler = useCallback(
     (item) => {
       dispatch(cartActions.addItem(item));
     },
-    [dispatch, cartActions]
+    [dispatch]
   );
 
   const removeItemHandler = useCallback(
     (id) => {
       dispatch(cartActions.removeItem(id));
     },
-    [dispatch, cartActions]
+    [dispatch]
   );
 
   const confirmHandler = () => {
@@ -44,10 +48,8 @@ const ShoppingCart = ({ toggleCart }) => {
   };
 
   const content = cartItems.map((item) => {
-    const {
-      imageUrl, title, price
-    } = products.find(
-      (product) => product.id === item.id
+    const { imageUrl, title, price, discount } = products.find(
+      (prod) => prod.id === item.id
     );
 
     return (
@@ -55,6 +57,7 @@ const ShoppingCart = ({ toggleCart }) => {
         imageUrl={imageUrl}
         title={title}
         price={price}
+        discount={discount}
         key={item.id}
         id={item.id}
         amount={item.amount}
@@ -68,7 +71,9 @@ const ShoppingCart = ({ toggleCart }) => {
   const Cart = () => {
     return (
       <section className={styles.cart}>
-        <ul>{content}</ul>
+        <ul style={cartItems.length > 2 ? { overflowY: "scroll" } : null}>
+          {content}
+        </ul>
         <h2>Total Price: NT$ {totalPrice}</h2>
         <div className={styles.actions}>
           <button onClick={() => toggleCart()}>Close</button>

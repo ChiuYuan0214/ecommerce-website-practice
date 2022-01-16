@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./CartItem.module.css";
 
 const CartItem = React.memo(
-  ({ id, amount, imageUrl, title, price, addItem, removeItem, toggleCart }) => {
+  ({ imageUrl, title, price, discount, id, amount, addItem, removeItem, toggleCart }) => {
     const navigate = useNavigate();
 
-    const totalPrice = amount * price;
+    const totalPrice = amount * price * (discount ? discount : 1);
 
     const checkDetailHandler = () => {
       navigate(`/${id}`);
@@ -26,7 +25,9 @@ const CartItem = React.memo(
           <div>
             <button onClick={() => removeItem(id)}>-</button>
             <p>{amount}</p>
-            <button onClick={() => addItem({ id, price, amount: 1 })}>+</button>
+            <button onClick={() => addItem({ id, price: 10, amount: 1 })}>
+              +
+            </button>
           </div>
           <div>NT$ {totalPrice.toFixed(0)}</div>
         </div>
