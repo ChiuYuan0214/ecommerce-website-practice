@@ -50,7 +50,7 @@ const Header = (props) => {
               </NavLink>
             </li>
             <li>
-              <a className={styles.btn} onClick={props.toggleCart}>Cart</a>
+              <p className={styles.btn} onClick={props.toggleCart}>Cart</p>
             </li>
             {!isAuth && (
               <>
@@ -74,7 +74,7 @@ const Header = (props) => {
                     navData.isActive ? styles.active : ""
                   }
                 >
-                  Profile
+                  Center
                 </NavLink>
               </li>
             )}

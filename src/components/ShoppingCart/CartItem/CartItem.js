@@ -4,9 +4,18 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CartItem.module.css";
 
 const CartItem = React.memo(
-  ({ imageUrl, title, price, discount, id, amount, addItem, removeItem, toggleCart }) => {
+  ({
+    imageUrl,
+    title,
+    price,
+    discount,
+    id,
+    amount,
+    addItem,
+    removeItem,
+    toggleCart,
+  }) => {
     const navigate = useNavigate();
-
     const totalPrice = amount * price * (discount ? discount : 1);
 
     const checkDetailHandler = () => {

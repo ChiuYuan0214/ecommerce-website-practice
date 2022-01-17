@@ -1,0 +1,91 @@
+.form {
+    width: 80%;
+    margin: 3rem 10%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.26);
+    padding: 1rem;
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.controls label {
+    font-size: .8rem;
+    color:rgb(124, 12, 12);
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+.controls input {
+    height: 2rem;
+    outline: none;
+    border: 1.5px solid rgb(124, 12, 12);
+    border-radius: 4px;
+}
+
+.labelError {
+    color: red;
+}
+
+.inputError {
+    border-color: red;
+    background-color: pink;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.actions button {
+    border-radius: 4px;
+    border: 1px solid rgb(124, 12, 12);
+    background-color:rgb(124, 12, 12);
+    color: white;
+    font-size: 1rem;
+    padding: .3rem .7rem;
+}
+
+.actions button:hover,
+.actions button:active {
+    border: 1px solid rgb(184, 16, 16);
+    background-color:rgb(184, 16, 16);
+}
+
+.form p {
+    align-self: center;
+    color: rgb(78, 8, 78);
+    text-align: center;
+    font-weight: bold;
+}
+
+.form p:hover {
+    color: blue;
+}
+
+@media (min-width: 500px) {
+    .controls {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .controls input {
+        width: 65%;
+    }
+}
+
+@media (min-width: 625px) {
+    .form {
+        max-width: 500px;
+        margin: 3rem calc((100% - 500px) / 2);
+    }
+
+    .controls {
+        align-items: flex-end;
+    }
+}

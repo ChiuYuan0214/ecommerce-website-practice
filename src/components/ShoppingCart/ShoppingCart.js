@@ -74,10 +74,10 @@ const ShoppingCart = ({ toggleCart }) => {
         <ul style={cartItems.length > 2 ? { overflowY: "scroll" } : null}>
           {content}
         </ul>
-        <h2>Total Price: NT$ {totalPrice}</h2>
+        <h2>Total Price: NT$ {totalPrice.toFixed(0)}</h2>
         <div className={styles.actions}>
           <button onClick={() => toggleCart()}>Close</button>
-          <button onClick={confirmHandler}>Confirm</button>
+          <button onClick={confirmHandler}>Buy</button>
         </div>
       </section>
     );

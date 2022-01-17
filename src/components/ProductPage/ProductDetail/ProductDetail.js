@@ -47,7 +47,7 @@ const ProductDetail = ({ product }) => {
       <Link to="/categories" className={styles.path}>
         CATEGORIES {">"}
       </Link>
-      <Link to={`/categories/${product.category}`} className={styles.path}>
+      <Link to={`/categories?cate=${product.category}`} className={styles.path}>
         {`${product.category.toUpperCase()} >`}
       </Link>
       <section className={styles.card}>

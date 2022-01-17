@@ -9,6 +9,7 @@ import ProductPage from './pages/ProductPage';
 import CategoriesPage from './pages/CategoriesPage';
 import DiscountPage from './pages/DiscountPage';
 import AuthPage from './pages/AuthPage';
+import CenterPage from './pages/CenterPage';
 
 import styles from "./App.module.css";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/discount" element={<DiscountPage />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/center" element={<CenterPage />} />
         </Routes>
       </main>
     </>
