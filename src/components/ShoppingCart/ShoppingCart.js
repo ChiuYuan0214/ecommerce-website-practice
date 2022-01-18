@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { cartActions } from "../../store/cart";
+import { authActions } from "../../store/auth";
 
 import CartItem from "./CartItem/CartItem";
 import Backdrop from "../UI/Backdrop/Backdrop";
@@ -13,9 +14,8 @@ const ShoppingCart = ({ toggleCart }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const products = useSelector((state) => state.prod.items);
-
   const isAuth = useSelector((state) => state.auth.isAuth);
-
+  const [isAddingAddress, setIsAddingAddress] = useState(false);
   const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce((sum, item) => {
@@ -43,7 +43,18 @@ const ShoppingCart = ({ toggleCart }) => {
   const confirmHandler = () => {
     if (!isAuth) {
       navigate("/auth");
+      dispatch(cartActions.toggleCart());
       return;
+    } else if (!isAddingAddress) {
+      setIsAddingAddress(true);
+      return;
+    } else {
+      const dataList = cartItems.map(item => {
+        const discount = products.find(prod => prod.id === item.id).discount;
+        return {...item, discount}
+      });
+      console.log('dataList: ', dataList);
+      dispatch(authActions.addBuyingHistory(dataList));
     }
   };
 

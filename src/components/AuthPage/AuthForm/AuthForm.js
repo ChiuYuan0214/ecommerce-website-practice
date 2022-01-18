@@ -30,13 +30,23 @@ const AuthForm = ({ isLogin, toggleLogin }) => {
       console.log("Please confirm your password.");
       return;
     }
-    console.log("Sign up succeed!", {
+
+    const userProfile = {
       name,
       password,
       email: signUpRef.current.email.value,
       phone: signUpRef.current.phone.value,
       birth: signUpRef.current.birth.value,
-    });
+    };
+
+    console.log("Sign up succeed!", userProfile);
+    dispatch(
+      authActions.setProfile({
+        target: "all",
+        data: { ...userProfile, password: null },
+      })
+    );
+    dispatch(authActions.login());
     setName("");
     setPassword("");
     setEmail("");
@@ -70,7 +80,7 @@ const AuthForm = ({ isLogin, toggleLogin }) => {
       </div>
       {!isLogin && (
         <SignUpInfo
-        className={styles.controls}
+          className={styles.controls}
           ref={signUpRef}
           passwordChange={(e) => setConfirmPassword(e.target.value)}
           emailChange={(e) => setEmail(e.target.value)}

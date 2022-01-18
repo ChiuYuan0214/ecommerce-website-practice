@@ -17,7 +17,6 @@ const initialState = {
       price: 1600,
       category: "book",
       discount: null,
-      isFav: false,
     },
     {
       id: "2",
@@ -27,7 +26,6 @@ const initialState = {
       price: 500,
       category: "dress",
       discount: null,
-      isFav: false,
     },
     {
       id: "3",
@@ -38,7 +36,6 @@ const initialState = {
       price: 3300,
       category: "dress",
       discount: 0.85,
-      isFav: false,
     },
     {
       id: "4",
@@ -48,7 +45,6 @@ const initialState = {
       price: 1200,
       category: "book",
       discount: null,
-      isFav: false,
     },
     {
       id: "5",
@@ -58,7 +54,6 @@ const initialState = {
       price: 20,
       category: "food",
       discount: null,
-      isFav: false,
     },
     {
       id: "6",
@@ -69,7 +64,6 @@ const initialState = {
       price: 1250,
       category: "food",
       discount: 0.95,
-      isFav: false,
     },
   ],
   history: [],
@@ -82,8 +76,6 @@ const prodSlice = createSlice({
   initialState,
   reducers: {
     setIsFav: (state, action) => {
-      console.log('setting!');
-      const updatedItems = state.items;
       const updatedItemIndex = state.items.findIndex(
         (item) => item.id === action.payload
       );

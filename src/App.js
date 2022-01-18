@@ -1,9 +1,12 @@
 
 import { useState } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { cartActions } from './store/cart';
+
 import Header from "./components/Header/Header";
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
-
 import HomePage from "./pages/HomePage";
 import ProductPage from './pages/ProductPage';
 import CategoriesPage from './pages/CategoriesPage';
@@ -14,11 +17,13 @@ import CenterPage from './pages/CenterPage';
 import styles from "./App.module.css";
 
 function App() {
-  const [cartIsOpen, setCartIsOpen] = useState(false);
+  const cartIsOpen = useSelector(state => state.cart.cartIsOpen);
+  const dispatch = useDispatch();
 
   const toggleCartHandler = () => {
-    setCartIsOpen(prev => !prev);
+    dispatch(cartActions.toggleCart());
   };
+
   return (
     <>
       {cartIsOpen && <ShoppingCart toggleCart={toggleCartHandler} />}

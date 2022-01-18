@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { prodActions } from "../../../store/products";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../../../store/auth";
 import { cartActions } from '../../../store/cart';
 
 import FavoriteIcon from "../../UI/FavoriteIcon/FavoriteIcon";
@@ -10,6 +10,7 @@ import styles from "./ProductDetail.module.css";
 
 const ProductDetail = ({ product }) => {
   const dispatch = useDispatch();
+  const isFav = useSelector(state => state.auth.authData.favoriteList.includes(product.id));
   const [bump, setBump] = useState(false);
 
   const discount = product.discount;
@@ -19,8 +20,8 @@ const ProductDetail = ({ product }) => {
     price = Math.round(price * discount);
   }
 
-  const setIsFavHandler = () => {
-      dispatch(prodActions.setIsFav(product.id));
+  const toggleFavHandler = () => {
+      dispatch(authActions.toggleFavorite(product.id));
   };
 
   const addItemHandler = () => {
@@ -30,6 +31,9 @@ const ProductDetail = ({ product }) => {
       amount: 1
     }));
     setBump(true);
+    setTimeout(() => {
+      dispatch(cartActions.toggleCart());
+    }, 300);
   };
 
   useEffect(() => {
@@ -65,10 +69,15 @@ const ProductDetail = ({ product }) => {
             {discount && <span>{sales}</span>}
           </div>
           <div className={styles.actions}>
-            <div className={styles.favorite}>
-              <FavoriteIcon isFav={product.isFav} onClick={setIsFavHandler} />
+            <div className={styles.favorite} onClick={toggleFavHandler}>
+              <FavoriteIcon isFav={isFav} />
             </div>
-            <button className={bump ? styles.bump : null} onClick={addItemHandler}>Add to Cart</button>
+            <button
+              className={bump ? styles.bump : null}
+              onClick={addItemHandler}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </section>

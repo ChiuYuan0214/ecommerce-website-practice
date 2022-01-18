@@ -1,0 +1,34 @@
+.board {
+  display: none;
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0.5rem;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+  height: 0;
+  animation: drop-down 0.5s ease-out;
+  animation-fill-mode: forwards;
+  overflow-y: scroll;
+}
+
+.drop {
+  display: block;
+}
+
+@keyframes drop-down {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 300px;
+  }
+}
+
+@media(min-width: 600px) {
+  .onPC {
+    display: block;
+    height: 300px;
+  }
+}

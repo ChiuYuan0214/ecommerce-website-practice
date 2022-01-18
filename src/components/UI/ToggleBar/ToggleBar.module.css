@@ -1,0 +1,45 @@
+.toggleBar {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  display: flex;
+  transition: all 0.3s;
+}
+
+.toggleBar span {
+  display: block;
+  margin: 0 0.5rem 0 auto;
+  transform: rotate(90deg);
+  font-size: 0.7rem;
+  font-weight: bold;
+  position: relative;
+  left: 0;
+  top: 0;
+  transition: all 0.3s;
+}
+
+.toggleBar.active {
+  color: white;
+  background-color: rgb(53, 44, 44);
+  border-radius: 4px 4px 0 0;
+}
+
+.toggleBar.active span {
+  transform: rotate(-90deg);
+  left: 0.3rem;
+  top: -0.1rem;
+  color: white;
+}
+
+@media (min-width: 600px) {
+  .onPC span {
+    display: none;
+  }
+
+  .onPC {
+    color: white;
+    background-color: rgb(53, 44, 44);
+    border-radius: 4px 4px 0 0;
+  }
+}

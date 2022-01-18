@@ -50,7 +50,7 @@ const Header = (props) => {
               </NavLink>
             </li>
             <li>
-              <p className={styles.btn} onClick={props.toggleCart}>Cart</p>
+              <p className={styles.btn} onClick={() => props.toggleCart()}>Cart</p>
             </li>
             {!isAuth && (
               <>

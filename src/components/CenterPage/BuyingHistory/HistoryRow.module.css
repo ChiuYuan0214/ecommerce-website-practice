@@ -1,0 +1,20 @@
+
+.list {
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.totalPrice {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(112, 23, 23);
+}
+
+.listItem {
+    display: flex;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.26);
+    margin: .5rem 0;
+}

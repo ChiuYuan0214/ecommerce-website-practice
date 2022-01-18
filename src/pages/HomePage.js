@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
-import { prodActions } from '../store/products';
+import { useSelector } from "react-redux";
 
 import SlideShow from "../components/HomePage/SlideShow/SlideShow";
 import HotSaleBlock from "../components/HomePage/HotSaleBlock/HotSaleBlock";
@@ -7,15 +6,10 @@ import CategoriesBlock from "../components/HomePage/CategoriesBlock/CategoriesBl
 
 const HomePage = () => {
     const items = useSelector((state) => state.prod.items);
-    const dispatch = useDispatch();
-
-    const isFavHandler = (prodId) => {
-      dispatch(prodActions.setIsFav(prodId));
-    };
 
     return (
         <>
-        <SlideShow setIsFav={isFavHandler} items={items} />
+        <SlideShow items={items} />
         <HotSaleBlock items={items} />
         <CategoriesBlock />
         </>
