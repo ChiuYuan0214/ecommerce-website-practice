@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { cartActions } from "../../store/cart";
 import { authActions } from "../../store/auth";
 
@@ -14,9 +13,7 @@ const ShoppingCart = ({ toggleCart }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const products = useSelector((state) => state.prod.items);
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
-  const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce((sum, item) => {
     let discount = products.find((prod) => prod.id === item.id).discount;
@@ -40,21 +37,23 @@ const ShoppingCart = ({ toggleCart }) => {
     [dispatch]
   );
 
+  const cancelHandler = () => {
+    toggleCart();
+    setIsAddingAddress(false);
+  };
+
   const confirmHandler = () => {
-    if (!isAuth) {
-      navigate("/auth");
-      dispatch(cartActions.toggleCart());
-      return;
-    } else if (!isAddingAddress) {
+    if (!isAddingAddress) {
       setIsAddingAddress(true);
       return;
     } else {
-      const dataList = cartItems.map(item => {
-        const discount = products.find(prod => prod.id === item.id).discount;
-        return {...item, discount}
+      const dataList = cartItems.map((item) => {
+        const discount = products.find((prod) => prod.id === item.id).discount;
+        return { ...item, discount };
       });
-      console.log('dataList: ', dataList);
       dispatch(authActions.addBuyingHistory(dataList));
+      dispatch(cartActions.reset());
+      setIsAddingAddress(false);
     }
   };
 
@@ -87,8 +86,8 @@ const ShoppingCart = ({ toggleCart }) => {
         </ul>
         <h2>Total Price: NT$ {totalPrice.toFixed(0)}</h2>
         <div className={styles.actions}>
-          <button onClick={() => toggleCart()}>Close</button>
-          <button onClick={confirmHandler}>Buy</button>
+          <button onClick={cancelHandler}>Close</button>
+          <button disabled={cartItems.length === 0} onClick={confirmHandler}>Buy</button>
         </div>
       </section>
     );

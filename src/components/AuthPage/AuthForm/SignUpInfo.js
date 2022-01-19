@@ -61,7 +61,7 @@ const SignUpInfo = React.forwardRef((props, ref) => {
         <label htmlFor="phone">Phone</label>
         <input
           id="phone"
-          type="phone"
+          type="tel"
           ref={phoneRef}
           onChange={(e) => phoneChange(e)}
           value={phone}

@@ -37,6 +37,10 @@ const ProductDetail = ({ product }) => {
   };
 
   useEffect(() => {
+    dispatch(authActions.addBrowsingHistory(product.id));
+  }, [dispatch, product.id]);
+
+  useEffect(() => {
     if (!bump) {
       return;
     }

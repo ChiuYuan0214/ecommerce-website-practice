@@ -1,9 +1,9 @@
-
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-
 import { cartActions } from './store/cart';
+import { authActions } from './store/auth';
+import { useCognito } from './hooks/cognito';
 
 import Header from "./components/Header/Header";
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
@@ -19,10 +19,21 @@ import styles from "./App.module.css";
 function App() {
   const cartIsOpen = useSelector(state => state.cart.cartIsOpen);
   const dispatch = useDispatch();
+  const {isAuth, isAuthenticated } = useCognito();
 
   const toggleCartHandler = () => {
     dispatch(cartActions.toggleCart());
   };
+
+  useEffect(() => {
+    isAuthenticated();
+  }, []);
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(authActions.login());
+    }
+  }, [isAuth]);
 
   return (
     <>

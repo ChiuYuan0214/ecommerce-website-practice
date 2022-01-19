@@ -9,8 +9,8 @@ const initialState = {
       phone: "0902350579",
       birth: "1993-02-14",
     },
-    buyingHistory: [], // {id(date), totalPrice, address, items: {id, amount, discount}[]}
-    favoriteList: [], // id
+    buyingHistory: [], // {id(date), totalPrice, address, items: {prodId, amount, discount}[]}
+    favoriteList: [], // prodId
     browsingHistory: [], // { id, historyId(date) }
   },
 };
@@ -24,9 +24,20 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.isAuth = false;
+      state.authData = {
+          profile: {
+            name: "",
+            email: "",
+            phone: "",
+            birth: "",
+          },
+          buyingHistory: [],
+          favoriteList: [],
+          browsingHistory: [],
+        };
     },
     setProfile: (state, action) => {
-      if (action.payload.target === 'all') {
+      if (action.payload.target === "all") {
         state.authData.profile = action.payload.data;
         return;
       }
@@ -62,7 +73,7 @@ const authSlice = createSlice({
     setFavorite: (state, action) => {
       let localList = state.authData.favoriteList;
       if (localList.length > 0) {
-        localList = localList.filter(id => !action.payload.includes(id));
+        localList = localList.filter((id) => !action.payload.includes(id));
       }
       state.authData.favoriteList = [...localList, action.payload];
     },
@@ -70,6 +81,12 @@ const authSlice = createSlice({
       const date = new Date();
       const historyId = date.getTime();
       const newHistory = { id: action.payload, historyId };
+      const targetIndex = state.authData.browsingHistory.findIndex(
+        (his) => his.id === action.payload
+      );
+      if (targetIndex >= 0) {
+        state.authData.browsingHistory.splice(targetIndex, 1);
+      }
       state.authData.browsingHistory.unshift(newHistory);
     },
     setBrowsingHistory: (state, action) => {

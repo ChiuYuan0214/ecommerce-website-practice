@@ -3,7 +3,6 @@
   height: 0;
   margin: 0 auto;
   background-color: white;
-  overflow: hidden;
   animation-name: drop-down;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -17,6 +16,7 @@
   margin: 0;
   padding: 1rem;
   position: absolute;
+  overflow-x: scroll;
 }
 
 .board li {
