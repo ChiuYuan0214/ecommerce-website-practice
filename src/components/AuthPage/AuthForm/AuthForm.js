@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../../store/auth";
 import { useCognito } from "../../../hooks/cognito";
-
 import SignUpInfo from "./SignUpInfo";
 
 import styles from "./AuthForm.module.css";
@@ -13,8 +12,11 @@ const AuthForm = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [isVerify, setIsVerify] = useState(false);
-  const [stage, setStage] = useState(null);
+
   const { isAuth, isLoading, error, sendRequest } = useCognito();
+
+  // form request type, for interacting with loading state and auth state.
+  const [stage, setStage] = useState(null);
 
   const nameRef = useRef();
   const [name, setName] = useState("");
@@ -36,11 +38,12 @@ const AuthForm = () => {
     }
   }, [isAuth]);
 
+  // only alert user some information after loading.
   useEffect(() => {
     if (isLoading) {
       return;
     }
-    if (error) {
+    if (error && stage) {
       alert(error);
       setStage(null);
       return;
@@ -53,6 +56,7 @@ const AuthForm = () => {
       setStage(null);
     } else if (stage === "signin") {
       navigate("/center");
+      setStage(null);
     }
   }, [isLoading, error, stage]);
 
@@ -71,19 +75,23 @@ const AuthForm = () => {
       setIsVerify(false);
       setStage("confirm");
     }
-    if (!isLogin && signUpRef.current.password.value !== passwordRef.current.value) {
+    if (
+      !isLogin &&
+      signUpRef.current.password.value !== passwordRef.current.value
+    ) {
       alert("Please confirm your password.");
       return;
     }
     if (!isLogin) {
       const userProfile = {
         name,
-        password,
         email: signUpRef.current.email.value,
         phone: signUpRef.current.phone.value,
         birth: signUpRef.current.birth.value,
       };
-      sendRequest("signup", userProfile);
+      sendRequest("signup", { ...userProfile, password });
+      setIsLogin(true);
+      setIsVerify(true);
       setStage("signup");
     }
 
@@ -148,7 +156,7 @@ const AuthForm = () => {
         />
       )}
       <div className={styles.actions}>
-        <button>{isLogin ? "Login" : "Sign up"}</button>
+        <button>{isLogin ? (isVerify ? "Verify" : "Login") : "Sign up"}</button>
       </div>
       {!isVerify && isLogin && (
         <p onClick={() => setIsVerify(true)}>I want to verify my account.</p>

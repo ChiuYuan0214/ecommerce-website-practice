@@ -106,6 +106,7 @@ export const useCognito = () => {
       const cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authDetails, {
         onSuccess(result) {
+          console.log("login succeed in useCognito!")
           dispatch({ type: "SUCCESS", isAuth: true });
         },
         onFailure(err) {
@@ -125,18 +126,18 @@ export const useCognito = () => {
     dispatch({ type: "SENDING" });
     const user = getAuthentiactedUser();
     if (!user) {
-      dispatch({ type: "SUCCESS"});
+      dispatch({ type: "SUCCESS" });
     } else {
       user.getSession((err, session) => {
         if (err) {
           console.log("User is not valid!");
-          dispatch({ type: "SUCCESS"});
+          dispatch({ type: "SUCCESS" });
         } else {
           if (session.isValid()) {
             dispatch({ type: "SUCCESS", isAuth: true });
             console.log("Session is valid");
           } else {
-            dispatch({ type: "SUCCESS"});
+            dispatch({ type: "SUCCESS" });
           }
         }
       });
@@ -151,4 +152,26 @@ export const useCognito = () => {
     signOut,
     isAuthenticated,
   };
+};
+
+export const getIdToken = async () => {
+  const idToken = await getAuthentiactedUser().getSession((err, session) => {
+    if (err) {
+      return null;
+    }
+    console.log('session:', session.getAccessToken().getJwtToken());
+    return session.getIdToken().getJwtToken();
+  });
+  return idToken;
+};
+
+export const getAccessToken = async () => {
+  const accessToken = await getAuthentiactedUser().getSession((err, session) => {
+    if (err) {
+      console.log("Error:", err.message);
+      return null;
+    }
+    return session.getAccessToken().getJwtToken();
+  });
+  return accessToken;
 };

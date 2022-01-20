@@ -4,12 +4,12 @@ const initialState = {
   isAuth: false,
   authData: {
     profile: {
-      name: "adam",
-      email: "rumble88481@gmail.com",
-      phone: "0902350579",
-      birth: "1993-02-14",
+      name: "Rick",
+      email: "12345678@gmail.com",
+      phone: "0922000123",
+      birth: "2000-12-25",
     },
-    buyingHistory: [], // {id(date), totalPrice, address, items: {prodId, amount, discount}[]}
+    buyingHistory: [], // {id(date): string, totalPrice: string, address: string[], items: {prodId, amount, discount}[]}
     favoriteList: [], // prodId
     browsingHistory: [], // { id, historyId(date) }
   },

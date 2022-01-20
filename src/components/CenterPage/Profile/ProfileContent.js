@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authActions } from "../../../store/auth";
 
 import DataRow from "./DataRow";
@@ -7,10 +7,14 @@ import DataRow from "./DataRow";
 import styles from "./ProfileContent.module.css";
 
 const ProfileContent = ({ isToggle }) => {
+  const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.auth.authData.profile);
+
+  // local profile data ( won't effect the profile state in redux )
   const [profile, setProfile] = useState(userProfile);
   const { name, email, phone, birth } = profile;
 
+  // for profile editing status
   const initialEditState = {
     name: false,
     email: false,
@@ -19,7 +23,12 @@ const ProfileContent = ({ isToggle }) => {
   };
   const [isEdit, setIsEdit] = useState(initialEditState);
 
-  const dispatch = useDispatch();
+  // auto reset the profile data if user logged in.
+  useEffect(() => {
+    if (userProfile) {
+      setProfile(userProfile);
+    }
+  }, [userProfile]);
 
   const toggleIsEditHandler = (target) => {
     setIsEdit((prev) => ({ ...initialEditState, [target]: !prev[target] }));
