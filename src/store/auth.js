@@ -9,9 +9,9 @@ const initialState = {
       phone: "0922000123",
       birth: "2000-12-25",
     },
-    buyingHistory: [], // {id(date): string, totalPrice: string, address: string[], items: {prodId, amount, discount}[]}
+    buyingHistory: [], // {date: string, totalPrice: string, items: {prodId, amount, discount}[]}
     favoriteList: [], // prodId
-    browsingHistory: [], // { id, historyId(date) }
+    browsingHistory: [], // { id, date }
   },
 };
 

@@ -13,8 +13,12 @@ export const useProfile = () => {
       method: "GET",
       headers: { Authorization: idToken },
     });
+    if (!response.ok) {
+      throw new Error('Failed to get profile');
+    }
     const data = await response.json();
     const { Username, UserAttributes: attrs } = data;
+    console.log('attrs:', attrs);
     let phone = attrs[4].Value.split("");
     phone.splice(0, 1);
     phone = phone.join("");

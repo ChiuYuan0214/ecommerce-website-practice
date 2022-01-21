@@ -1,23 +1,47 @@
 import { useState, useCallback } from "react";
-
-const DB_URL = "https://yxoo4302jh.execute-api.us-east-2.amazonaws.com/dev";
+import { getIdToken, getAccessToken } from "./cognito";
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const sendRequest = useCallback(async (method, token, body) => {
+
+  const sendRequest = useCallback(async (type, post, data) => {
     setIsLoading(true);
     setError(null);
+    const idToken = await getIdToken();
+    let url =
+      "https://yxoo4302jh.execute-api.us-east-2.amazonaws.com/dev";
+    let body = null;
+    if (type === "buying") {
+      url += "/buying-history";
+      if (post === true) {
+        const date = new Date().getTime().toString();
+        const uploadData = data.map((item) => ({
+          date,
+          prodId: item.id,
+          amount: item.amount + "",
+          discount: item.discount + "",
+        }));
+        body = { items: uploadData };
+        console.log('body:', body);
+      }
+    }
+    if (type === "browsing") {
+      url = "";
+      if (post === true) {
+        body = {};
+      }
+    }
     try {
-      const response = await fetch(DB_URL, {
-        method: method ? method : "GET",
+      console.log('idToken:', idToken)
+      const response = await fetch(url, {
+        method: post ? "POST" : "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token ? token : null,
+          Authorization: "allow",
         },
-        body: body ? body : null,
+        body: body ? JSON.stringify(body) : null,
       });
-
       if (!response.ok) {
         throw new Error("Request failed.");
       }
@@ -25,6 +49,7 @@ const useHttp = () => {
       console.log(data);
     } catch (err) {
       setError(err.message || "Something went wrong.");
+      console.log(err.message);
     }
     setIsLoading(false);
   }, []);

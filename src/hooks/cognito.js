@@ -159,7 +159,6 @@ export const getIdToken = async () => {
     if (err) {
       return null;
     }
-    console.log('session:', session.getAccessToken().getJwtToken());
     return session.getIdToken().getJwtToken();
   });
   return idToken;
