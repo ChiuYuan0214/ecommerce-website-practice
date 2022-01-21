@@ -167,7 +167,6 @@ export const getIdToken = async () => {
 export const getAccessToken = async () => {
   const accessToken = getAuthentiactedUser().getSession((err, session) => {
     if (err) {
-      console.log("Error:", err.message);
       return null;
     }
     return session.getAccessToken().getJwtToken();
