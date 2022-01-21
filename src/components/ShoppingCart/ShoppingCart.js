@@ -3,8 +3,6 @@ import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { authActions } from "../../store/auth";
-import useHttp from "../../hooks/http";
-import { getAccessToken } from "../../hooks/cognito";
 
 import CartItem from "./CartItem/CartItem";
 import Backdrop from "../UI/Backdrop/Backdrop";
@@ -13,7 +11,6 @@ import styles from "./ShoppingCart.module.css";
 
 const ShoppingCart = ({ toggleCart }) => {
   const dispatch = useDispatch();
-  const {isLoading, error, sendRequest} = useHttp();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const products = useSelector((state) => state.prod.items);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
@@ -54,9 +51,7 @@ const ShoppingCart = ({ toggleCart }) => {
         const discount = products.find((prod) => prod.id === item.id).discount;
         return { ...item, discount };
       });
-      // dispatch(authActions.addBuyingHistory(dataList));
-      const accessToken = getAccessToken();
-      sendRequest('buying', true, dataList);
+      dispatch(authActions.addBuyingHistory(dataList));
       dispatch(cartActions.reset());
       setIsAddingAddress(false);
     }
