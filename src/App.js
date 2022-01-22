@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "./store/cart";
@@ -18,6 +18,7 @@ import CenterPage from "./pages/CenterPage";
 import styles from "./App.module.css";
 
 function App() {
+  const [navbar, setNavbar] = useState(false);
   const cartIsOpen = useSelector((state) => state.cart.cartIsOpen);
   const globalAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
@@ -26,6 +27,10 @@ function App() {
 
   const toggleCartHandler = () => {
     dispatch(cartActions.toggleCart());
+  };
+
+  const toggleNavbarHandler = () => {
+    setNavbar((prev) => !prev);
   };
 
   useEffect(() => {
@@ -37,32 +42,36 @@ function App() {
     } else if (globalAuth && profile) {
       dispatch(authActions.setProfile({ target: "all", data: profile }));
     }
-  }, [globalAuth, profile]);
+  }, [dispatch, getProfile, globalAuth, profile]);
 
   useEffect(() => {
     isAuthenticated();
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isAuth) {
       dispatch(authActions.login());
     }
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   return (
     <>
       {cartIsOpen && <ShoppingCart toggleCart={toggleCartHandler} />}
-      <Header toggleCart={toggleCartHandler} />
-      <main className={styles.main}>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/:prodId" element={<ProductPage />} />
-          <Route path="/categories" element={<CategoriesPage />} />
-          <Route path="/discount" element={<DiscountPage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/center" element={<CenterPage />} />
-        </Routes>
+      <Header
+        navbar={navbar}
+        toggleNavbar={toggleNavbarHandler}
+        toggleCart={toggleCartHandler}
+      />
+      <main className={styles.main} onClick={() => setNavbar(false)}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/:prodId" element={<ProductPage />} />
+            <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/discount" element={<DiscountPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/center" element={<CenterPage />} />
+          </Routes>
       </main>
     </>
   );

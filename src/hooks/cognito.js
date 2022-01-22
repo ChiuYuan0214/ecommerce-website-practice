@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
 import {
   CognitoUserPool,
@@ -122,7 +122,7 @@ export const useCognito = () => {
     dispatch({ type: "SUCCESS" });
   };
 
-  const isAuthenticated = () => {
+  const isAuthenticated = useCallback(() => {
     dispatch({ type: "SENDING" });
     const user = getAuthentiactedUser();
     if (!user) {
@@ -142,7 +142,7 @@ export const useCognito = () => {
         }
       });
     }
-  };
+  }, [dispatch]);
 
   return {
     isAuth: authState.isAuth,

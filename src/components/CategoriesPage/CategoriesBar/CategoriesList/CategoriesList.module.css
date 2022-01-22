@@ -6,6 +6,8 @@
   animation-name: drop-down;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .board {
@@ -16,7 +18,6 @@
   margin: 0;
   padding: 1rem;
   position: absolute;
-  overflow-x: scroll;
 }
 
 .board li {

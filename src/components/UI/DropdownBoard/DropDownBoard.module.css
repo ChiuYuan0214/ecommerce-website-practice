@@ -10,7 +10,7 @@
   height: 0;
   animation: drop-down 0.5s ease-out;
   animation-fill-mode: forwards;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .drop {

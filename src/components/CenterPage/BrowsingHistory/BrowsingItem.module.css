@@ -1,56 +1,65 @@
 .item {
-    display: flex;
-    flex-wrap: wrap; /*  mobile only */
-    align-items: center;
-    border-radius: 4px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.26);
-    padding: .2rem .5rem;
-    margin: .3rem 0;
+  display: flex;
+  flex-wrap: wrap; /*  mobile only */
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+  padding: 0.2rem 0.5rem;
+  margin: 0.3rem 0;
 }
 
 .item img {
-    width: 3rem;
-    height: 3rem;
-    object-fit: cover;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
 }
 
 .item h3 {
-    margin: 0 0 0 .5rem;
-    font-size: .5rem;
+  margin: 0 0 0 0.5rem;
+  font-size: 0.5rem;
 }
 
 .item button {
-    border: 1px solid rgb(177, 131, 139);
-    border-radius: 4px;
-    background-color: rgb(177, 131, 139);
-    color: white;
-    padding: .3rem .4rem;
-    margin: 0 .5rem 0 auto;
-    font-size: .3rem;
+  border: 1px solid rgb(177, 131, 139);
+  border-radius: 4px;
+  background-color: rgb(177, 131, 139);
+  color: white;
+  padding: 0.3rem 0.4rem;
+  margin: 0 0.5rem 0 auto;
+  font-size: 0.3rem;
 }
 
 .item p {
-    font-size: .3rem;
-    letter-spacing: 0;
-    margin: 0;
+  font-size: 0.3rem;
+  letter-spacing: 0;
+  margin: 0;
 }
 
 .item p:last-of-type {
-    margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 .textBox {
-    display: flex;
+  display: flex;
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+  .textBox {
+    width: 100%;
+  }
 }
 
 @media (min-width: 600px) {
-    .item {
-        flex-wrap: nowrap;
-    }
-    .textBox {
-        flex-direction: column;
-    }
-    .item p:last-of-type {
+  .item {
+    flex-wrap: nowrap;
+  }
+  .item h3 {
+    width: 2rem;
+  }
+  .textBox {
+    flex-direction: column;
+  }
+  .item p:last-of-type {
     margin-left: 0;
-}
+  }
 }

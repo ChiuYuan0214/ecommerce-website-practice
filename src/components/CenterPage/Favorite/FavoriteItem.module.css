@@ -30,7 +30,7 @@
 .discount {
   font-size: 0.3rem;
   color: rgb(150, 21, 21);
-  margin-right: 1rem;
+  margin-right: 0; /* 1rem */
 }
 
 .price {
@@ -78,17 +78,38 @@
   opacity: 1;
 }
 
+@media (min-width: 0px) and (max-width: 315px) {
+  .price,
+  .discount {
+    display: none;
+  }
+}
+
 @media (min-width: 0px) and (max-width: 480px) {
+  .item h3 {
+    width: 3rem;
+  }
   .priceBox {
-    margin: auto;
+    margin: auto .3rem auto auto;
+    letter-spacing: 0;
+  }
+  .price,
+  .discount {
+    font-size: 5px;
   }
   .priceBox,
   .actions {
     flex-direction: column;
     align-items: flex-end;
   }
+  .actions {
+    margin-left: .1rem;
+  }
   .actions button {
     width: 3rem;
+  }
+  .actions button:last-of-type {
+    margin-left: 0;
   }
 }
 

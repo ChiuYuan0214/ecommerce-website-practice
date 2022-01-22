@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
@@ -8,17 +8,13 @@ import NavbarToggler from "./NavbarToggler";
 
 import styles from "./Header.module.css";
 
-const Header = (props) => {
+const Header = ({navbar, toggleNavbar, toggleCart}) => {
   const dispatch = useDispatch();
   const { signOut } = useCognito();
 
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const [navbarIsShown, setNavbarIsShown] = useState(false);
-  const navClass = navbarIsShown ? styles.show : null;
-
-  const toggleNavbarHandler = () => {
-    setNavbarIsShown((prev) => !prev);
-  };
+  
+  const navClass = navbar ? styles.show : null;
 
   const logoutHandler = () => {
     signOut();
@@ -30,10 +26,10 @@ const Header = (props) => {
     <header className={styles.header}>
       <div className={styles.logo}>LOGO GOES HERE</div>
       <div style={{ position: "relative" }}>
-        <NavbarToggler onClick={toggleNavbarHandler} />
+        <NavbarToggler onClick={toggleNavbar} />
         <nav
           className={`${styles.navbar} ${navClass}`}
-          onClick={toggleNavbarHandler}
+          onClick={toggleNavbar}
         >
           <ul>
             <li>
@@ -61,7 +57,7 @@ const Header = (props) => {
               </NavLink>
             </li>
             <li>
-              <p className={styles.btn} onClick={() => props.toggleCart()}>
+              <p className={styles.btn} onClick={() => toggleCart()}>
                 Cart
               </p>
             </li>
