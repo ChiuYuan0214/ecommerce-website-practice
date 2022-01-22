@@ -37,6 +37,7 @@ const BuyingHistory = ({target, setToggle}) => {
   if (buyingHistory.length > 0) {
     content = buyingHistory.map((history) => (
       <HistoryRow
+        key={history.date}
         onDrop={onDropRow}
         setOnDrop={setOnDropRowHandler}
         history={history}

@@ -11,23 +11,23 @@ const HistoryRow = ({ onDrop, setOnDrop, history }) => {
 
   const toggleDropdownHandler = () => {
     setDropdown((prev) => !prev);
-    setOnDrop(history.id);
+    setOnDrop(history.date);
   };
 
   useEffect(() => {
-    if (onDrop !== history.id) {
+    if (onDrop !== history.date) {
       setDropdown(false);
     }
-  }, [onDrop, history.id]);
+  }, [onDrop, history.date]);
 
-  const date = new Date(+history.id);
+  const date = new Date(+history.date);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDay();
 
   const buyList = history.items.map((item, index) => {
     return (
-      <HistoryItem item={item} index={index} />
+      <HistoryItem key={item.id} item={item} index={index} />
     );
   });
 

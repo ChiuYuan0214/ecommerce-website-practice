@@ -135,7 +135,7 @@ export const useCognito = () => {
         } else {
           if (session.isValid()) {
             dispatch({ type: "SUCCESS", isAuth: true });
-            console.log("Session is valid");
+            console.log("User is valid.");
           } else {
             dispatch({ type: "SUCCESS" });
           }
@@ -165,7 +165,11 @@ export const getIdToken = async () => {
 };
 
 export const getAccessToken = async () => {
-  const accessToken = getAuthentiactedUser().getSession((err, session) => {
+  const user = getAuthentiactedUser();
+  if (!user) {
+    return null;
+  }
+  const accessToken = user.getSession((err, session) => {
     if (err) {
       return null;
     }

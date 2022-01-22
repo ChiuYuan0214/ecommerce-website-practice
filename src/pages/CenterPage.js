@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/auth";
+import useHttp from "../hooks/http";
 
 import Profile from "../components/CenterPage/Profile/Profile";
 import BuyingHistory from "../components/CenterPage/BuyingHistory/BuyingHistory";
@@ -8,7 +11,33 @@ import BrowsingHistory from "../components/CenterPage/BrowsingHistory/BrowsingHi
 import styles from "./CenterPage.module.css";
 
 const CenterPage = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.prod.items);
   const [toggleTarget, setToggleTarget] = useState("profile");
+  const {data: newBuyHis, sendRequest: fetchBuyHis} = useHttp();
+  
+  useEffect(() => {
+    fetchBuyHis('buying');
+  }, [fetchBuyHis]);
+
+  useEffect(() => {
+    if (newBuyHis) {
+      const buyList = newBuyHis.map(his => {
+        const totalPrice = his.items.map(item => {
+          const price = products.find(prod => prod.id === item.id).price;
+          let discount = 1;
+          if (!isNaN(item.discount)) {
+            discount = item.discount;
+          }
+          return item.amount * discount * price;
+        }).reduce((sum, prodPrice) => sum + prodPrice, 0);
+        
+        return {...his, totalPrice};
+      });
+
+      dispatch(authActions.setBuyingHistory(buyList));
+    }
+  }, [newBuyHis, dispatch, authActions]);
 
   const setToggleHandler = (title) => {
     setToggleTarget((prev) => {

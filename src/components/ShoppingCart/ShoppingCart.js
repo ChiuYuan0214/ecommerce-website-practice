@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { authActions } from "../../store/auth";
+import useHttp from '../../hooks/http';
 
 import CartItem from "./CartItem/CartItem";
 import Backdrop from "../UI/Backdrop/Backdrop";
@@ -10,10 +11,12 @@ import Backdrop from "../UI/Backdrop/Backdrop";
 import styles from "./ShoppingCart.module.css";
 
 const ShoppingCart = ({ toggleCart }) => {
+
+  // custom hook used to add loading spinner and error message
+  const {isLoading, error, sendRequest} = useHttp();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const products = useSelector((state) => state.prod.items);
-  const [isAddingAddress, setIsAddingAddress] = useState(false);
 
   const totalPrice = cartItems.reduce((sum, item) => {
     let discount = products.find((prod) => prod.id === item.id).discount;
@@ -39,22 +42,16 @@ const ShoppingCart = ({ toggleCart }) => {
 
   const cancelHandler = () => {
     toggleCart();
-    setIsAddingAddress(false);
   };
 
   const confirmHandler = () => {
-    if (!isAddingAddress) {
-      setIsAddingAddress(true);
-      return;
-    } else {
       const dataList = cartItems.map((item) => {
         const discount = products.find((prod) => prod.id === item.id).discount;
         return { ...item, discount };
       });
+      sendRequest('buying', true, dataList);
       dispatch(authActions.addBuyingHistory(dataList));
       dispatch(cartActions.reset());
-      setIsAddingAddress(false);
-    }
   };
 
   const content = cartItems.map((item) => {

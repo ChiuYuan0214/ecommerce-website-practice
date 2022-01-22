@@ -5,7 +5,6 @@ import { cartActions } from "./store/cart";
 import { authActions } from "./store/auth";
 import { useCognito } from "./hooks/cognito";
 import { useProfile } from "./hooks/profile";
-// import useDynamoDB from "./hooks/dynamodb";
 
 import Header from "./components/Header/Header";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
@@ -24,7 +23,6 @@ function App() {
   const dispatch = useDispatch();
   const { isAuth, isAuthenticated } = useCognito();
   const { profile, getProfile } = useProfile();
-  // const { buyHis, getBuyHis} = useBuyHis();
 
   const toggleCartHandler = () => {
     dispatch(cartActions.toggleCart());

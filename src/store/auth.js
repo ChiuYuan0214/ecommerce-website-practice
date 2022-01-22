@@ -45,8 +45,7 @@ const authSlice = createSlice({
     },
     addBuyingHistory: (state, action) => {
       const items = action.payload;
-      const date = new Date();
-      const id = date.getTime().toString();
+      const date = new Date().getTime().toString();
       const totalPrice = items.reduce((sum, item) => {
         let price = item.price * item.amount;
         if (item.discount) {
@@ -54,11 +53,12 @@ const authSlice = createSlice({
         }
         return sum + price;
       }, 0);
-      const newHistory = { id, totalPrice, items: action.payload };
+      const newHistory = { date, totalPrice, items: action.payload };
       state.authData.buyingHistory.unshift(newHistory);
     },
     setBuyingHistory: (state, action) => {
-      state.authData.buyingHistory = action.payload;
+      const sortedList = action.payload.sort((a,b) => a.date > b.date ? -1 : 1);
+      state.authData.buyingHistory = sortedList;
     },
     toggleFavorite: (state, action) => {
       const targetIndex = state.authData.favoriteList.findIndex(

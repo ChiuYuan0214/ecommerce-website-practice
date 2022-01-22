@@ -24,13 +24,13 @@
 
 .btnBoard li {
   margin: 0.5rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btnBoard button {
   background-color: rgb(100, 88, 88);
   border: none;
   border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   outline: none;
   padding: 0.5rem 1rem;
   color: white;

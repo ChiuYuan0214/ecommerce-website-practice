@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export const useProfile = () => {
   const [profile, setProfile] = useState(null);
+  
   const getProfile = async () => {
     const accessToken = await getAccessToken();
     const idToken = await getIdToken();
@@ -18,7 +19,6 @@ export const useProfile = () => {
     }
     const data = await response.json();
     const { Username, UserAttributes: attrs } = data;
-    console.log('attrs:', attrs);
     let phone = attrs[4].Value.split("");
     phone.splice(0, 1);
     phone = phone.join("");

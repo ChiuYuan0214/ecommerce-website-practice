@@ -41,6 +41,7 @@
 .desc {
   font-size: 0.9rem;
   text-align: left;
+  margin-bottom: 2rem;
 }
 
 .flex {
@@ -93,7 +94,7 @@
 .favorite {
   position: relative;
   right: -5.5rem;
-  top: -4.5rem;
+  top: -5.5rem;
 }
 
 .actions button {
@@ -184,7 +185,7 @@
   }
 
   .favorite {
-    top: 1.5rem;
+    top: 1.7rem;
     left: -5rem;
   }
 

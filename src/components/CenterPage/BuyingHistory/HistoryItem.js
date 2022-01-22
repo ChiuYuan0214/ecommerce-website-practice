@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import styles from './HistoryItem.module.css';
 
 const HistoryItem = ({item, index}) => {
-    const {id, price, amount, discount} = item;
+    const {id, amount, discount} = item;
     const product = useSelector(state => state.prod.items).find(prod => prod.id === id);
-    const {imageUrl, title} = product;
+    const {imageUrl, title, price} = product;
     let discountDesc = null;
     if (discount) {
       discountDesc = Math.round((1 - discount) * 100) + "% OFF";
