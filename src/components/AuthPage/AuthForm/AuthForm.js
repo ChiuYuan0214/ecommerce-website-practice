@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../../store/auth";
@@ -6,6 +6,40 @@ import { useCognito } from "../../../hooks/cognito";
 import SignUpInfo from "./SignUpInfo";
 
 import styles from "./AuthForm.module.css";
+
+// const inputErrorInitialState = {
+//   nameInvalid: false,
+//   passwordInvalid: false,
+//   confirmPasswordInvalid: false,
+//   emailInvalid: false,
+//   phoneInvalid: false,
+//   birthInvalid: false,
+// };
+
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "NAME_ERROR":
+//       return {
+//         ...state,
+//         nameInvalid: true,
+//       };
+//     case "NAME_PASS":
+//       return {
+//         ...state,
+//         nameInvalid: false,
+//       };
+//     case "NAME_ERROR":
+//       return {
+//         ...state,
+//         nameInvalid: true,
+//       };
+//     case "NAME_PASS":
+//       return {
+//         ...state,
+//         nameInvalid: false,
+//       };
+//   }
+// };
 
 const AuthForm = () => {
   const dispatch = useDispatch();
@@ -30,13 +64,46 @@ const AuthForm = () => {
   const [phone, setPhone] = useState("");
   const [birth, setBirth] = useState("");
 
+  const [onCheck, setOnCheck] = useState(false);
+
+  // const [
+  //   {
+  //     nameInvalid,
+  //     passwordInvalid,
+  //     confirmPasswordInvalid,
+  //     emailInvalid,
+  //     phoneInvalid,
+  //     birthInvalid,
+  //   },
+  //   setInvalid,
+  // ] = useState(inputErrorInitialState);
+
+  const nameInvalid = name.trim().length === 0;
+  const passwordInvalid =
+    password.trim().length < 6 ||
+    password.match(/[0-9]/g) === null ||
+    password.match(/[a-z]/g) === null;
+  const confirmPasswordInvalid = confirmPassword !== password;
+  console.log('confirmPasswordInvalid:', confirmPasswordInvalid)
+  const emailInvalid = !email.includes("@");
+  const phoneInvalid = phone.match(/[a-z]/gi) !== null;
+  const birthInvalid = birth.trim().length === 0;
+
+  const signInValid = !nameInvalid && !passwordInvalid;
+  const signUpValid =
+    signInValid &&
+    !confirmPasswordInvalid &&
+    !emailInvalid &&
+    !phoneInvalid &&
+    !birthInvalid;
+
   useEffect(() => {
     if (isAuth) {
       dispatch(authActions.login());
     } else {
       dispatch(authActions.logout());
     }
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   // only alert user some information after loading.
   useEffect(() => {
@@ -58,7 +125,7 @@ const AuthForm = () => {
       navigate("/center");
       setStage(null);
     }
-  }, [isLoading, error, stage]);
+  }, [isLoading, error, stage, navigate]);
 
   const toggleLoginHandler = () => {
     setIsLogin((prev) => !prev);
@@ -67,6 +134,11 @@ const AuthForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (isLogin && !isVerify) {
+      setOnCheck(true);
+      console.log('signInvalid:', signInValid)
+      if (!signInValid) {
+        return;
+      }
       sendRequest("signin", { name, password });
       setStage("signin");
     }
@@ -75,14 +147,11 @@ const AuthForm = () => {
       setIsVerify(false);
       setStage("confirm");
     }
-    if (
-      !isLogin &&
-      signUpRef.current.password.value !== passwordRef.current.value
-    ) {
-      alert("Please confirm your password.");
-      return;
-    }
     if (!isLogin) {
+      setOnCheck(true);
+      if (!signUpValid) {
+        return;
+      }
       const userProfile = {
         name,
         email: signUpRef.current.email.value,
@@ -101,11 +170,16 @@ const AuthForm = () => {
     setEmail("");
     setPhone("");
     setBirth("");
+    setOnCheck(false);
   };
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      <div className={styles.controls}>
+      <div
+        className={`${styles.controls} ${
+          nameInvalid && onCheck && styles.error
+        }`}
+      >
         <label htmlFor="name">Your Name</label>
         <input
           id="name"
@@ -114,9 +188,14 @@ const AuthForm = () => {
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
+        {nameInvalid && onCheck && <p>Please enter your name.</p>}
       </div>
       {!isVerify && (
-        <div className={styles.controls}>
+        <div
+          className={`${styles.controls} ${
+            passwordInvalid && onCheck && styles.error
+          }`}
+        >
           <label htmlFor="password">Your Password</label>
           <input
             id="password"
@@ -127,6 +206,12 @@ const AuthForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
+          {passwordInvalid && onCheck && (
+            <p>
+              Password should be equal or more than 6 char, includes lowercase
+              and number.
+            </p>
+          )}
         </div>
       )}
       {isVerify && isLogin && (
@@ -144,6 +229,7 @@ const AuthForm = () => {
       {!isLogin && (
         <SignUpInfo
           className={styles.controls}
+          errorClass={styles.error}
           ref={signUpRef}
           passwordChange={(e) => setConfirmPassword(e.target.value)}
           emailChange={(e) => setEmail(e.target.value)}
@@ -153,16 +239,35 @@ const AuthForm = () => {
           email={email}
           phone={phone}
           birth={birth}
+          onCheck={onCheck}
+          invalid={{
+            confirmPassword: confirmPasswordInvalid,
+            email: emailInvalid,
+            phone: phoneInvalid,
+            birth: birthInvalid,
+          }}
         />
       )}
       <div className={styles.actions}>
         <button>{isLogin ? (isVerify ? "Verify" : "Login") : "Sign up"}</button>
       </div>
       {!isVerify && isLogin && (
-        <p onClick={() => setIsVerify(true)}>I want to verify my account.</p>
+        <p
+          onClick={() => {
+            setIsVerify(true);
+            setOnCheck(false);
+          }}
+        >
+          I want to verify my account.
+        </p>
       )}
       {isVerify && isLogin && (
-        <p onClick={() => setIsVerify(false)}>
+        <p
+          onClick={() => {
+            setIsVerify(false);
+            setOnCheck(false);
+          }}
+        >
           I want to sign in existing account.
         </p>
       )}
@@ -170,6 +275,7 @@ const AuthForm = () => {
         onClick={() => {
           toggleLoginHandler();
           setIsVerify(false);
+          setOnCheck(false);
         }}
       >
         {isLogin

@@ -3,6 +3,7 @@ import React, { useRef, useImperativeHandle } from "react";
 const SignUpInfo = React.forwardRef((props, ref) => {
   const {
     className,
+    errorClass,
     password,
     passwordChange,
     email,
@@ -11,6 +12,8 @@ const SignUpInfo = React.forwardRef((props, ref) => {
     phoneChange,
     birth,
     birthChange,
+    onCheck,
+    invalid,
   } = props;
   const passwordRef = useRef();
   const emailRef = useRef();
@@ -37,7 +40,11 @@ const SignUpInfo = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <div className={className}>
+      <div
+        className={`${className} ${
+          invalid.confirmPassword && onCheck && errorClass
+        }`}
+      >
         <label htmlFor="confirm-password">Confirm Password</label>
         <input
           id="confirm-password"
@@ -46,8 +53,15 @@ const SignUpInfo = React.forwardRef((props, ref) => {
           onChange={(e) => passwordChange(e)}
           value={password}
         />
+        {invalid.confirmPassword && onCheck && (
+          <p>Please check your confirm password again.</p>
+        )}
       </div>
-      <div className={className}>
+      <div
+        className={`${className} ${
+          invalid.email && onCheck && errorClass
+        }`}
+      >
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -56,8 +70,15 @@ const SignUpInfo = React.forwardRef((props, ref) => {
           onChange={(e) => emailChange(e)}
           value={email}
         />
+        {invalid.email && onCheck && (
+          <p>Please enter valid E-mail.</p>
+        )}
       </div>
-      <div className={className}>
+      <div
+        className={`${className} ${
+          invalid.phone && onCheck && errorClass
+        }`}
+      >
         <label htmlFor="phone">Phone</label>
         <input
           id="phone"
@@ -66,8 +87,15 @@ const SignUpInfo = React.forwardRef((props, ref) => {
           onChange={(e) => phoneChange(e)}
           value={phone}
         />
+        {invalid.phone && onCheck && (
+          <p>Please enter valid phone number.</p>
+        )}
       </div>
-      <div className={className}>
+      <div
+        className={`${className} ${
+          invalid.birth && onCheck && errorClass
+        }`}
+      >
         <label htmlFor="birth">Birth</label>
         <input
           id="birth"
@@ -76,6 +104,9 @@ const SignUpInfo = React.forwardRef((props, ref) => {
           onChange={(e) => birthChange(e)}
           value={birth}
         />
+        {invalid.birth && onCheck && (
+          <p>Please enter your birth date.</p>
+        )}
       </div>
     </>
   );
