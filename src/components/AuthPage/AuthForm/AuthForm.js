@@ -7,51 +7,22 @@ import SignUpInfo from "./SignUpInfo";
 
 import styles from "./AuthForm.module.css";
 
-// const inputErrorInitialState = {
-//   nameInvalid: false,
-//   passwordInvalid: false,
-//   confirmPasswordInvalid: false,
-//   emailInvalid: false,
-//   phoneInvalid: false,
-//   birthInvalid: false,
-// };
-
-// const reducer = (state, action) => {
-//   switch (action.type) {
-//     case "NAME_ERROR":
-//       return {
-//         ...state,
-//         nameInvalid: true,
-//       };
-//     case "NAME_PASS":
-//       return {
-//         ...state,
-//         nameInvalid: false,
-//       };
-//     case "NAME_ERROR":
-//       return {
-//         ...state,
-//         nameInvalid: true,
-//       };
-//     case "NAME_PASS":
-//       return {
-//         ...state,
-//         nameInvalid: false,
-//       };
-//   }
-// };
-
 const AuthForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // to check if user is trying to log in or sign up.
   const [isLogin, setIsLogin] = useState(true);
+
+  // to check if user is trying to verify account.
   const [isVerify, setIsVerify] = useState(false);
 
   const { isAuth, isLoading, error, sendRequest } = useCognito();
 
-  // form request type, for interacting with loading state and auth state.
+  // form request type, for interacting with loading state and auth state defined above.
   const [stage, setStage] = useState(null);
 
+  // form input ref and state.
   const nameRef = useRef();
   const [name, setName] = useState("");
   const passwordRef = useRef();
@@ -64,20 +35,10 @@ const AuthForm = () => {
   const [phone, setPhone] = useState("");
   const [birth, setBirth] = useState("");
 
+  // Toggling the form checking status, to avoid error message at the first time.
   const [onCheck, setOnCheck] = useState(false);
 
-  // const [
-  //   {
-  //     nameInvalid,
-  //     passwordInvalid,
-  //     confirmPasswordInvalid,
-  //     emailInvalid,
-  //     phoneInvalid,
-  //     birthInvalid,
-  //   },
-  //   setInvalid,
-  // ] = useState(inputErrorInitialState);
-
+  // verify input validaty based on current input state.
   const nameInvalid = name.trim().length === 0;
   const passwordInvalid =
     password.trim().length < 6 ||
@@ -89,6 +50,7 @@ const AuthForm = () => {
   const phoneInvalid = phone.match(/[a-z]/gi) !== null;
   const birthInvalid = birth.trim().length === 0;
 
+  // check if the form is submittable.
   const signInValid = !nameInvalid && !passwordInvalid;
   const signUpValid =
     signInValid &&
@@ -97,6 +59,7 @@ const AuthForm = () => {
     !phoneInvalid &&
     !birthInvalid;
 
+  // change the redux isAuth state based on "isAuth" received from cognito hook.
   useEffect(() => {
     if (isAuth) {
       dispatch(authActions.login());
@@ -115,6 +78,8 @@ const AuthForm = () => {
       setStage(null);
       return;
     }
+
+    // only process the code below when 'is not loading' and 'have no error'.
     if (stage === "signup") {
       alert("The verification code already sent to your E-mail, please check.");
       setStage(null);
@@ -133,9 +98,8 @@ const AuthForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setOnCheck(true);
     if (isLogin && !isVerify) {
-      setOnCheck(true);
-      console.log('signInvalid:', signInValid)
       if (!signInValid) {
         return;
       }
@@ -147,8 +111,9 @@ const AuthForm = () => {
       setIsVerify(false);
       setStage("confirm");
     }
+
+    // condition: is signing up
     if (!isLogin) {
-      setOnCheck(true);
       if (!signUpValid) {
         return;
       }

@@ -18,10 +18,10 @@ import CenterPage from "./pages/CenterPage";
 import styles from "./App.module.css";
 
 function App() {
+  const dispatch = useDispatch();
   const [navbar, setNavbar] = useState(false);
   const cartIsOpen = useSelector((state) => state.cart.cartIsOpen);
   const globalAuth = useSelector((state) => state.auth.isAuth);
-  const dispatch = useDispatch();
   const { isAuth, isAuthenticated } = useCognito();
   const { profile, getProfile } = useProfile();
 
@@ -33,6 +33,7 @@ function App() {
     setNavbar((prev) => !prev);
   };
 
+  // get the user profile after logged in automatically if it's not exist yet.
   useEffect(() => {
     if (!globalAuth) {
       return;
@@ -44,10 +45,12 @@ function App() {
     }
   }, [dispatch, getProfile, globalAuth, profile]);
 
+  // check if the user have token only the first time.
   useEffect(() => {
     isAuthenticated();
   }, [isAuthenticated]);
 
+  // set redux state isAuth to true after cognito verified.
   useEffect(() => {
     if (isAuth) {
       dispatch(authActions.login());

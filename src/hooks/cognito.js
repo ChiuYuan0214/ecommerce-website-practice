@@ -71,6 +71,7 @@ export const useCognito = () => {
         if (err) {
           console.log("Error message: ", err.message);
           dispatch({ type: "ERROR", error: "Sign up failed." });
+          return;
         }
         dispatch({ type: "SUCCESS" });
       });
@@ -106,7 +107,7 @@ export const useCognito = () => {
       const cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authDetails, {
         onSuccess(result) {
-          console.log("login succeed in useCognito!")
+          console.log("login succeed in useCognito!");
           dispatch({ type: "SUCCESS", isAuth: true });
         },
         onFailure(err) {
