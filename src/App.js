@@ -8,12 +8,6 @@ import { useProfile } from "./hooks/profile";
 
 import Header from "./components/Header/Header";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
-// import HomePage from "./pages/HomePage";
-// import ProductPage from "./pages/ProductPage";
-// import CategoriesPage from "./pages/CategoriesPage";
-// import DiscountPage from "./pages/DiscountPage";
-// import AuthPage from "./pages/AuthPage";
-// import CenterPage from "./pages/CenterPage";
 
 import styles from "./App.module.css";
 
