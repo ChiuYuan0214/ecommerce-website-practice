@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import jeansImg from '../images/Jeans.png';
-import algorithmImg from '../images/Algorithm.png';
-import tShirtImg from '../images/T-shirt.png';
-import javaScriptImg from '../images/JavaScript.png';
-import instantNoodlesImg from '../images/Instant-Noodles.png';
-import proteinImg from '../images/Protein.png';
+import jeansImg from '../images/Jeans.webp';
+import algorithmImg from '../images/Algorithm.webp';
+import tShirtImg from '../images/T-shirt.webp';
+import javaScriptImg from '../images/JavaScript.webp';
+import instantNoodlesImg from '../images/Instant-Noodles.webp';
+import proteinImg from '../images/Protein.webp';
 
 const initialState = {
   items: [

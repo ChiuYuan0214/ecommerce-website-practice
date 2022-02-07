@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "./store/cart";
@@ -8,14 +8,22 @@ import { useProfile } from "./hooks/profile";
 
 import Header from "./components/Header/Header";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
-import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-import CategoriesPage from "./pages/CategoriesPage";
-import DiscountPage from "./pages/DiscountPage";
-import AuthPage from "./pages/AuthPage";
-import CenterPage from "./pages/CenterPage";
+// import HomePage from "./pages/HomePage";
+// import ProductPage from "./pages/ProductPage";
+// import CategoriesPage from "./pages/CategoriesPage";
+// import DiscountPage from "./pages/DiscountPage";
+// import AuthPage from "./pages/AuthPage";
+// import CenterPage from "./pages/CenterPage";
 
 import styles from "./App.module.css";
+
+const HomePage = React.lazy(() => import('./pages/HomePage'));
+const ProductPage = React.lazy(() => import('./pages/ProductPage'));
+const CategoriesPage = React.lazy(() => import('./pages/CategoriesPage'));
+const DiscountPage = React.lazy(() => import('./pages/DiscountPage'));
+const AuthPage = React.lazy(() => import('./pages/AuthPage'));
+const CenterPage = React.lazy(() => import('./pages/CenterPage'));
+
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +74,7 @@ function App() {
         toggleCart={toggleCartHandler}
       />
       <main className={styles.main} onClick={() => setNavbar(false)}>
+        <Suspense fallback={<h1>Loading...</h1>}>
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
@@ -75,6 +84,7 @@ function App() {
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/center" element={<CenterPage />} />
           </Routes>
+        </Suspense>
       </main>
     </>
   );
