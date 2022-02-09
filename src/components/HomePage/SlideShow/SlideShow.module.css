@@ -17,13 +17,13 @@
   position: absolute;
   z-index: 10;
   cursor: pointer;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .previous:hover,
 .next:hover {
   opacity: 1;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
 .previous {
@@ -48,12 +48,23 @@
 }
 
 .previous::after {
-  left: -80%;
-  top: -4.5%;
+  left: -67%;
+  top: -7.2%;
 }
 
 .next::after {
-  left: -95%;
-  top: -4.5%;
+  left: -80%;
+  top: -6.5%;
 }
 
+@media (min-width: 500px) {
+  .previous::after {
+    left: -80%;
+    top: -4.5%;
+  }
+
+  .next::after {
+    left: -95%;
+    top: -4.5%;
+  }
+}

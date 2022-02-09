@@ -60,29 +60,27 @@ const ProductDetail = ({ product }) => {
       </Link>
       <section className={styles.card}>
         <img src={product.imageUrl} alt={product.title} />
-        <h2>{product.title}</h2>
-        <p className={styles.desc}>{product.description}</p>
-        <div className={styles.flex}>
-          <div className={styles.priceBox}>
-            {discount && (
-              <p className={styles.originalPrice}>NT$ {product.price}</p>
-            )}
-            <p className={`${styles.price} ${discount ? styles.onSale : null}`}>
-              NT$ {price}
-            </p>
-            {discount && <span>{sales}</span>}
-          </div>
-          <div className={styles.actions}>
+        <div className={styles.info}>
+          <div className={styles.title}>
+            <h2>{product.title}</h2>
             <div className={styles.favorite} onClick={toggleFavHandler}>
               <FavoriteIcon isFav={isFav} />
             </div>
-            <button
-              className={bump ? styles.bump : null}
-              onClick={addItemHandler}
-            >
-              Add to Cart
-            </button>
           </div>
+          <p>{product.description}</p>
+          {discount && <span className={styles.discount}>{sales}</span>}
+          <div
+            className={`${styles.priceBox} ${discount ? styles.onSale : ""}`}
+          >
+            {discount && <p>NT$ {product.price}</p>}
+            <p>NT$ {price}</p>
+          </div>
+          <button
+            className={bump ? styles.bump : null}
+            onClick={addItemHandler}
+          >
+            Add to Cart
+          </button>
         </div>
       </section>
     </>

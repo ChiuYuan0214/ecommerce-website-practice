@@ -57,14 +57,14 @@
 
 .onDrop {
   animation-name: drop-down;
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-out;
 }
 
 .onDrop li {
   animation-name: scale;
-  animation-delay: 0.3s;
-  animation-duration: 0.5s;
+  animation-delay: 0.1s;
+  animation-duration: 0.3s;
   animation-fill-mode: forwards;
 }
 

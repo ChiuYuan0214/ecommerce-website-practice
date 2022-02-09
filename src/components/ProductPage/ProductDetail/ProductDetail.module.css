@@ -4,8 +4,8 @@
   list-style-type: none;
   color: black;
   font-weight: 600;
-  font-size: 0.9rem;
-  margin: 0 0 1rem 0.5rem;
+  font-size: 1.2rem;
+  margin: 1rem 0 2rem 0.5rem;
 }
 
 .path:hover,
@@ -15,106 +15,120 @@
 }
 
 .card {
+  max-width: 40rem;
   text-align: center;
   background-color: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
-  border-radius: 4px;
-  padding: 1rem;
+  border-radius: 20px;
+  margin: 0 1rem;
+  padding: 2rem;
   animation-name: fade-in;
   animation-duration: 1s;
-}
-
-.card img {
-  display: block;
-  margin: 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
-  max-width: 100%;
-  max-height: 40vh;
-}
-
-.card h2 {
-  font-size: 2rem;
-  margin: 1rem;
-}
-
-.desc {
-  font-size: 0.9rem;
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-.flex {
-  display: flex;
-}
-
-.price {
-  display: block;
-  font-weight: 700;
-  font-size: 1.5rem;
-  text-align: left;
-  margin: 0.7rem 0;
-}
-
-.originalPrice {
-  font-size: 0.8rem;
-  text-align: left;
-  text-decoration: line-through;
-  margin: 0.3rem 0;
-}
-
-.onSale {
-  text-align: left;
-  font-size: 1rem;
-  margin-top: 0.3rem;
-  color: rgb(129, 25, 25);
-}
-
-.priceBox span {
-  display: block;
-  text-align: left;
-  font-size: 0.7rem;
-  font-weight: bold;
-  color: rgb(129, 25, 25);
-}
-
-.priceBox {
   display: flex;
   flex-direction: column;
-  align-items: left;
 }
 
-.actions {
-  margin-left: auto;
+.card > img {
+  display: block;
+  margin: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+.info {
+  margin: 2rem auto;
   display: flex;
-  flex-direction: column-reverse;
-  align-items: right;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.title > h2,
+.info > p {
+  display: block;
+  text-align: left;
+}
+
+.title > h2 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem;
+}
+
+.info > p {
+  margin-top: 1rem;
+  width: 100%;
+  height: 5rem;
+  overflow: hidden;
 }
 
 .favorite {
+  align-self: flex-end;
   position: relative;
-  right: -5.5rem;
-  top: -5.5rem;
+  left: -2rem;
+  top: 9.7rem;
 }
 
-.actions button {
+.discount {
+  display: block;
+  border-radius: 25px;
+  margin: 0.5rem 0 1rem 0;
+  padding: 0.3rem 0.3rem;
+  border: 1px solid rgb(245, 70, 99);
+  background-color: rgb(245, 70, 99);
+  color: white;
+  font-size: 0.5rem;
+  align-self: flex-start;
+}
+
+.priceBox {
+  margin-top: 2rem;
   width: 100%;
-  border: none;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid black;
+}
+
+.priceBox > p {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.priceBox.onSale {
+  margin-top: 0;
+}
+
+.priceBox.onSale > p:first-of-type {
+  text-decoration: line-through;
+  font-size: 1rem;
+}
+
+.priceBox.onSale > p:last-of-type {
+  color: rgb(245, 70, 99);
+}
+
+.info > button {
+  margin: 1rem auto;
+  align-self: center;
+  background-color: brown;
+  border: 1px splid black;
   border-radius: 4px;
-  padding: 0.5rem;
-  background-color: rgb(240, 105, 105);
-  font-size: 1.3rem;
+  border-style: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
   color: white;
 }
 
-.actions button:hover,
-.actions button:active {
-  background-color:rgb(185, 21, 21);
-  transition: all .3s ease-out;
-}
-
 .bump {
-  animation: bump .3s ease-out;
+  animation: bump 0.3s ease-out;
 }
 
 @keyframes bump {
@@ -144,52 +158,78 @@
   }
 }
 
-@media (min-width: 730px) {
-  .desc {
-    font-size: 1.2rem;
-    text-align: center;
+@media (min-width: 500px) {
+  .path {
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0.5rem;
   }
-
-  .flex {
-    height: 10vh;
-  }
-
-  .priceBox {
+  .card {
+    box-shadow: 7px 7px 4px 2px rgba(0, 0, 0, 0.26);
     flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-start;
-    margin: 0 auto;
+  }
+  .card > img {
+    margin: 0 auto 0 0;
+    width: auto;
+    max-width: 45%;
   }
 
-  .originalPrice {
-    font-size: 1rem;
-    margin: 0 1rem 0 0;
+  .info {
+    min-height: 30rem;
+    max-height: 40vh;
+    margin: 0 0 0 3rem;
+    align-items: flex-start;
   }
 
-  .price {
-    font-size: 2rem;
-  }
-
-  .onSale {
-    font-size: 1.5rem;
-    margin: 0;
-  }
-
-  .priceBox span {
-    margin-left: 0.5rem;
-  }
-
-  .actions {
+  .title {
     flex-direction: row;
-    align-items: bottom;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title > h2 {
+    font-size: 3rem;
+    margin: 0 0 1rem;
+  }
+
+  .info > p {
+    width: auto;
+    max-width: 80%;
   }
 
   .favorite {
-    top: 1.7rem;
-    left: -5rem;
+    align-self: flex-start;
+    position: relative;
+    left: -2rem;
+    top: 1.8rem;
   }
 
-  .actions button {
-    padding: 0.5rem 1rem;
+  .discount {
+    align-self: flex-end;
+    margin: 0.5rem 0 0 1rem;
   }
+
+  .priceBox {
+    padding-bottom: 2rem;
+  }
+
+  .priceBox > p {
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .info > button {
+    margin: auto 3rem 3rem;
+    align-self: flex-end;
+  }
+}
+
+@media (min-width: 730px) {
+  /* .favorite {
+    top: 1.7rem;
+    left: -5rem;
+  } */
 }

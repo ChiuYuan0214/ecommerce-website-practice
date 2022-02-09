@@ -1,6 +1,12 @@
 .main {
-  margin: 100px auto 0;
+  margin: 73px auto 0;
   padding: 0;
+}
+
+@media (min-width: 500px) {
+  .main {
+    margin-top: 75px;
+  }
 }
 
 @media (min-width: 760px) {

@@ -4,19 +4,21 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .controls {
   width: 100%;
+  max-width: 25rem;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 
 .controls label {
+  display: block;
   font-size: 0.8rem;
-  color: rgb(124, 12, 12);
+  color: rgb(98, 37, 2);
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
@@ -24,7 +26,7 @@
 .controls input {
   height: 2rem;
   outline: none;
-  border: 1.5px solid rgb(124, 12, 12);
+  border: 1.5px solid rgb(98, 37, 2);
   border-radius: 4px;
 }
 
@@ -40,8 +42,8 @@
 
 .actions button {
   border-radius: 4px;
-  border: 1px solid rgb(124, 12, 12);
-  background-color: rgb(124, 12, 12);
+  border: 1px solid rgb(98, 37, 2);
+  background-color: rgb(98, 37, 2);
   color: white;
   font-size: 1rem;
   padding: 0.3rem 0.7rem;
@@ -55,20 +57,34 @@
 
 .form > p {
   align-self: center;
-  color: rgb(78, 8, 78);
+  color: rgb(49, 23, 1);
   text-align: center;
   font-weight: bold;
+  margin: 1rem 0 .5rem;
+}
+
+.form > p:last-of-type {
+  margin-top: 0;
 }
 
 .form > p:hover {
-  color: blue;
+  color: rgb(197, 91, 5);
 }
 
 @media (min-width: 500px) {
+  .form {
+    padding: 2rem;
+  }
+
   .controls {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .controls label {
+    margin-bottom: 0;
   }
 
   .controls input {
@@ -96,9 +112,5 @@
   .form {
     max-width: 500px;
     margin: 3rem calc((100% - 500px) / 2);
-  }
-
-  .controls {
-    align-items: flex-end;
   }
 }

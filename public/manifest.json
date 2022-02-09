@@ -1,6 +1,6 @@
 {
-  "short_name": "A simple e-commerce web site",
-  "name": "Create React App Sample",
+  "short_name": "E-commerce Site",
+  "name": "A simple e-commerce web site",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

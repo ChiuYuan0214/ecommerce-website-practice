@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../../store/auth";
@@ -63,8 +63,6 @@ const AuthForm = () => {
   useEffect(() => {
     if (isAuth) {
       dispatch(authActions.login());
-    } else {
-      dispatch(authActions.logout());
     }
   }, [isAuth, dispatch]);
 
