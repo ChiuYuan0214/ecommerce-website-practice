@@ -22,7 +22,7 @@
 .priceBox {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   width: auto;
   margin-left: 1rem;
 }
@@ -34,7 +34,7 @@
 }
 
 .price {
-  font-size: 0.3rem;
+  font-size: 0.8rem;
   letter-spacing: 0;
 }
 
@@ -95,13 +95,20 @@
   }
   .price,
   .discount {
-    font-size: 5px;
+    font-size: 12px;
+    margin-bottom: 0;
   }
+ 
   .priceBox,
   .actions {
     flex-direction: column;
     align-items: flex-end;
   }
+
+  .priceBox > p {
+    margin-top: 0;
+  }
+  
   .actions {
     margin-left: .1rem;
   }
@@ -115,19 +122,18 @@
 
 @media (min-width: 470px) {
   .priceBox {
-    width: 7rem;
+    max-width: 10rem;
+  }
+  .price {
+    margin-left: 1rem;
   }
 }
 
 @media (min-width: 600px) {
-  .priceBox,
-  .actions {
-    flex-direction: column;
-  }
   .priceBox {
-    align-items: flex-end;
+    align-items: center;
     align-self: flex-end;
-    margin-right: 1rem;
+    margin: 0 1rem 0 auto;
     width: auto;
   }
   .discount {
@@ -137,6 +143,16 @@
     width: 3rem;
   }
   .actions button:last-of-type {
-    margin-left: 0;
+    margin-left: .5rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .priceBox,
+  .actions {
+    flex-direction: column;
+  }
+  .actions {
+    align-items: flex-end;
   }
 }

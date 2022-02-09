@@ -21,9 +21,9 @@ const HistoryRow = ({ onDrop, setOnDrop, history }) => {
   }, [onDrop, history.date]);
 
   const date = new Date(+history.date);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDay();
+  const buyYear = date.getFullYear();
+  const buyMonth = date.getMonth() + 1;
+  const buyDate = date.getDate();
 
   const buyList = history.items.map((item, index) => {
     return (
@@ -36,7 +36,7 @@ const HistoryRow = ({ onDrop, setOnDrop, history }) => {
       <ToggleBar
         isToggle={dropdown}
         onClick={toggleDropdownHandler}
-        title={`Time: ${year}/ ${month}/ ${day}`}
+        title={`Time: ${buyYear}/ ${buyMonth}/ ${buyDate}`}
       />
       <DropDownBoard dropdown={dropdown}>
         <p className={styles.totalPrice}>

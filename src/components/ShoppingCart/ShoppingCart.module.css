@@ -1,7 +1,6 @@
 .cart {
   width: 310px;
-  min-height: 100px;
-  max-height: 50vh;
+
   position: fixed;
   z-index: 1000;
   top: calc(50% - 25vh);
@@ -17,11 +16,13 @@
 .cart ul {
   list-style-type: none;
   text-decoration: none;
-  height: 80%;
+  min-height: 150px;
+  max-height: 300px;
   width: 100%;
   padding: 0;
   margin: 0 0 1rem 0;
   border-bottom: 2px solid grey;
+  overflow: scroll;
 }
 
 .cart h2 {
