@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(230, 164, 42);
+  background-color: rgb(29, 27, 27);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.26);
 }
 
@@ -17,7 +17,7 @@
   margin: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  color: rgb(54, 53, 53);
+  color: rgb(248, 219, 165);
 }
 
 .navbar {
@@ -70,7 +70,7 @@
 }
 
 .btn {
-  color: white;
+  color: rgb(248, 219, 165);
   font-size: 1.2rem;
   font-weight: 700;
   display: block;
@@ -118,12 +118,12 @@
   }
 
   .navbar a {
-    color: black;
+    color: rgb(248, 219, 165);
     font-size: 1rem;
   }
 
   .btn {
-    color: rgb(141, 17, 17);
+    color: rgb(248, 219, 165);
     font-size: 1rem;
   }
 }

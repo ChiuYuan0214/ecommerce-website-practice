@@ -19,12 +19,13 @@ const CategoriesBlock = () => {
   };
 
   const btnList = cateList.map((cate) => (
-    <li key={cate}>
-      <button onMouseEnter={() => {
+    <li
+      key={cate}
+      onMouseEnter={() => {
         setCateHandler(cate);
-      }}>
-        {cate.toUpperCase()}
-      </button>
+      }}
+    >
+      {cate.toUpperCase()}
     </li>
   ));
 

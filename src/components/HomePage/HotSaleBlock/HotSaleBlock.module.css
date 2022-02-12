@@ -5,14 +5,15 @@
   width: 100%;
   margin: 0;
   padding: 1rem 2rem;
-  background: linear-gradient(
+  background-color: transparent;
+  /* background: linear-gradient(
     40deg,
     rgb(149, 5, 5) 0%,
     rgb(160, 65, 9) 30%,
     rgb(107, 41, 15) 50%,
     rgb(192, 94, 14) 70%,
     rgb(107, 57, 15) 100%
-  );
+  ); */
 }
 
 .card {
@@ -47,6 +48,7 @@
 
 .icon span {
   font-size: 1rem;
+  font-weight: bold;
 }
 
 .icon::before {
@@ -57,7 +59,7 @@
   left: -2.6rem;
   width: 4.75rem;
   height: 4.75rem;
-  background-color: rgb(238, 238, 59);
+  background-color: rgb(248, 219, 165);
   border-radius: 50%;
 }
 
@@ -67,7 +69,8 @@
   align-items: center;
   width: 100%;
   height: 20%;
-  background-color: rgb(209, 202, 202);
+  background-color: rgb(29, 27, 27);
+  color: rgb(248, 219, 165);
   padding: 0.5rem;
 }
 

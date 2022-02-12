@@ -2,8 +2,8 @@
     width: 35px;
     height: 35px;
     position: relative;
-    border-top: 7px solid rgb(54, 53, 53);
-    border-bottom: 7px solid rgb(54, 53, 53);
+    border-top: 7px solid rgb(248, 219, 165);
+    border-bottom: 7px solid rgb(248, 219, 165);
     margin-right: 20px;
     background-color: transparent;
 }
@@ -14,7 +14,7 @@
     top: 7px;
     width: 35px;
     height: 7px;
-    background-color: rgb(54, 53, 53);
+    background-color: rgb(248, 219, 165);
 }
 
 @media(min-width: 760px) {

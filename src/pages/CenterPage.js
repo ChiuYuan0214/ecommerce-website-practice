@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth";
-import useHttp from "../hooks/http";
+import useUserData from "../hooks/user-data";
 
 import Profile from "../components/CenterPage/Profile/Profile";
 import BuyingHistory from "../components/CenterPage/BuyingHistory/BuyingHistory";
@@ -14,7 +14,7 @@ const CenterPage = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.prod.items);
   const [toggleTarget, setToggleTarget] = useState("profile");
-  const {data: newBuyHis, sendRequest: fetchBuyHis} = useHttp();
+  const {data: newBuyHis, sendRequest: fetchBuyHis} = useUserData();
   
   useEffect(() => {
     fetchBuyHis('buying');
@@ -37,7 +37,7 @@ const CenterPage = () => {
 
       dispatch(authActions.setBuyingHistory(buyList));
     }
-  }, [newBuyHis, dispatch, authActions]);
+  }, [newBuyHis, dispatch, products]);
 
   const setToggleHandler = (title) => {
     setToggleTarget((prev) => {

@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { getAccessToken } from "./cognito";
 
-const useHttp = () => {
+const useUserData = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -26,7 +26,7 @@ const useHttp = () => {
     return await Promise.all(
       dataList.map((data) => fetchData(url, method, data))
     );
-  }, []);
+  }, [fetchData]);
 
   const sendRequest = useCallback(
     async (type, post, data) => {
@@ -34,7 +34,7 @@ const useHttp = () => {
       setError(null);
 
       const accessToken = await getAccessToken();
-      // console.log("accessToken:", accessToken);
+
       let url = "https://yxoo4302jh.execute-api.us-east-2.amazonaws.com/dev";
       const query = `?accessToken=${accessToken}`;
 
@@ -67,7 +67,7 @@ const useHttp = () => {
           if (!dataList) {
             return;
           }
-          dataList.map((data) => {
+          dataList.forEach((data) => {
             const index = output.findIndex((his) => his.date === +data.date.S);
             const prodData = {
               id: data.prodId.S,
@@ -87,12 +87,12 @@ const useHttp = () => {
           setData(output);
         }
       }
-      if (type === "browsing") {
-        if (post === true) {
-        }
-      }
+      // if (type === "browsing") {
+      //   if (post === true) {
+      //   }
+      // }
     },
-    [getAccessToken, multiRequest, fetchData]
+    [multiRequest, fetchData]
   );
 
   return {
@@ -103,4 +103,4 @@ const useHttp = () => {
   };
 };
 
-export default useHttp;
+export default useUserData;

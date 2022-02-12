@@ -1,5 +1,5 @@
 .card {
-  background-color: white;
+  background-color: rgb(29, 27, 27);
   width: 100%;
   padding: 1rem;
 }
@@ -9,7 +9,7 @@
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  color: rgb(230, 164, 42);
+  color: rgb(248, 219, 165);
 }
 
 .btnBoard {
@@ -24,17 +24,19 @@
 
 .btnBoard li {
   margin: 0.5rem;
-}
-
-.btnBoard button {
-  background-color: rgb(100, 88, 88);
-  border: none;
+  background-color: rgb(248, 219, 165);
+  border: 1px solid rgb(248, 219, 165);
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  outline: none;
-  padding: 0.5rem 1rem;
-  color: white;
-  font-size: 0.8rem;
+  padding: 0.4rem 1.2rem;
+  color: rgb(29, 27, 27);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btnBoard li:hover {
+  background-color: rgb(29, 27, 27);
+  color: rgb(248, 219, 165);
 }
 
 .prodList {
@@ -46,9 +48,10 @@
 .prodList li {
   display: inline-block;
   margin: 0.3rem;
-  border: 1.5px dotted grey;
+  border: 1.5px dotted rgb(248, 219, 165);
   border-radius: 25px;
   padding: 0.5rem;
+  color: rgb(248, 219, 165);
   font-size: 0.5rem;
   animation-name: fade-in;
 }

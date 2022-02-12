@@ -8,6 +8,7 @@ import { useProfile } from "./hooks/profile";
 
 import Header from "./components/Header/Header";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+import LoadingAnimation from './components/UI/LoadingAnimation/LoadingAnimation';
 
 import styles from "./App.module.css";
 
@@ -24,7 +25,7 @@ function App() {
   const [navbar, setNavbar] = useState(false);
   const cartIsOpen = useSelector((state) => state.cart.cartIsOpen);
   const globalAuth = useSelector((state) => state.auth.isAuth);
-  const { isAuth, isAuthenticated } = useCognito();
+  const { isAuth, isLoading, isAuthenticated } = useCognito();
   const { profile, getProfile } = useProfile();
 
   const toggleCartHandler = () => {
@@ -62,6 +63,7 @@ function App() {
   return (
     <>
       {cartIsOpen && <ShoppingCart toggleCart={toggleCartHandler} />}
+      {isLoading && <LoadingAnimation />}
       <Header
         navbar={navbar}
         toggleNavbar={toggleNavbarHandler}

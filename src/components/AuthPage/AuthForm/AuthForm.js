@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../../store/auth";
 import { useCognito } from "../../../hooks/cognito";
 import SignUpInfo from "./SignUpInfo";
+import LoadingAnimation from '../../UI/LoadingAnimation/LoadingAnimation';
 
 import styles from "./AuthForm.module.css";
 
@@ -138,6 +140,7 @@ const AuthForm = () => {
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
+      {isLoading && <LoadingAnimation />}
       <div
         className={`${styles.controls} ${
           nameInvalid && onCheck && styles.error

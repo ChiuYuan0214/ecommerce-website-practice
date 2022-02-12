@@ -1,15 +1,16 @@
+import { useSelector } from "react-redux";
+import CategoriesList from "./CategoriesList/CategoriesList";
 
-import { useSelector } from 'react-redux';
-import CategoriesList from './CategoriesList/CategoriesList';
-
-import styles from './CategoriesBar.module.css';
+import styles from "./CategoriesBar.module.css";
 
 const CategoriesBar = ({ cateState, setCateHandler }) => {
   const categories = useSelector((state) => state.prod.categories);
 
   const list = categories.map((cate) => (
     <li
-      className={styles.cate}
+      className={`${styles.cate} ${
+        cateState === cate ? styles.cateActive : ""
+      }`}
       key={cate}
       onClick={setCateHandler.bind(null, cate)}
     >

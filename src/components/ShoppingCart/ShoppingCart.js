@@ -3,17 +3,18 @@ import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { authActions } from "../../store/auth";
-import useHttp from '../../hooks/http';
+import useUserData from '../../hooks/user-data';
 
 import CartItem from "./CartItem/CartItem";
 import Backdrop from "../UI/Backdrop/Backdrop";
+import LoadingAnimation from '../UI/LoadingAnimation/LoadingAnimation';
 
 import styles from "./ShoppingCart.module.css";
 
 const ShoppingCart = ({ toggleCart }) => {
 
   // custom hook used to add loading spinner and error message
-  const {isLoading, error, sendRequest} = useHttp();
+  const {isLoading, sendRequest} = useUserData();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const products = useSelector((state) => state.prod.items);
@@ -94,6 +95,7 @@ const ShoppingCart = ({ toggleCart }) => {
 
   return (
     <>
+      {isLoading && <LoadingAnimation />}
       {createPortal(<Backdrop onClick={() => toggleCart()} />, portal)}
       {createPortal(<Cart />, portal)}
     </>

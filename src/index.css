@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: monospace;
+  font-family: sans-serif;
   letter-spacing: 0.05rem;
   background-color: rgb(248, 219, 165);
 }
