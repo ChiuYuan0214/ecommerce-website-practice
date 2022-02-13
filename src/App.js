@@ -70,7 +70,7 @@ function App() {
         toggleCart={toggleCartHandler}
       />
       <main className={styles.main} onClick={() => setNavbar(false)}>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<LoadingAnimation />}>
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
