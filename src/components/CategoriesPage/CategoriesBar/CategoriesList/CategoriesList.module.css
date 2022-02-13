@@ -3,20 +3,23 @@
   height: 0;
   margin: 0 auto;
   background-color: rgb(29, 27, 27);
+  border: 5px solid rgb(29, 27, 27);
+  position: relative;
+  padding: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
   animation-name: drop-down;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .board {
   display: flex;
   list-style-type: none;
   text-decoration: none;
+  padding: 0;
   height: 35vh;
   margin: 0;
-  padding: 1rem;
   position: absolute;
 }
 
@@ -95,6 +98,6 @@
   }
 
   .board li {
-    width: 200px;
+    width: 240px;
   }
 }

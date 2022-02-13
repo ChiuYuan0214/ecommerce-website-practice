@@ -60,12 +60,12 @@ const ProductDetail = ({ product }) => {
       </Link>
       <section className={styles.card}>
         <img src={product.imageUrl} alt={product.title} />
+        <div className={styles.favorite} onClick={toggleFavHandler}>
+          <FavoriteIcon isFav={isFav} />
+        </div>
         <div className={styles.info}>
           <div className={styles.title}>
             <h2>{product.title}</h2>
-            <div className={styles.favorite} onClick={toggleFavHandler}>
-              <FavoriteIcon isFav={isFav} />
-            </div>
           </div>
           <p>{product.description}</p>
           {discount && <span className={styles.discount}>{sales}</span>}
