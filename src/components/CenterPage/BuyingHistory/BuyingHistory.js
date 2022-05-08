@@ -16,6 +16,7 @@ const BuyingHistory = ({target, setToggle}) => {
     setToggle('buying');
   };
 
+  // set onDropRow to specified history id.
   const setOnDropRowHandler = (id) => {
     setOnDropRow(id);
   };
@@ -34,6 +35,7 @@ const BuyingHistory = ({target, setToggle}) => {
 
   let content = <h1>No buying history yet.</h1>;
 
+  // a row per history.
   if (buyingHistory.length > 0) {
     content = buyingHistory.map((history) => (
       <HistoryRow

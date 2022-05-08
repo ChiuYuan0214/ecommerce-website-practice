@@ -16,10 +16,12 @@ const CenterPage = () => {
   const [toggleTarget, setToggleTarget] = useState("profile");
   const {data: newBuyHis, sendRequest: fetchBuyHis} = useUserData();
   
+  // auto fetch the buying history from DynamoDB when rendered.
   useEffect(() => {
     fetchBuyHis('buying');
   }, [fetchBuyHis]);
 
+  // if there's buying history exist inside DynamoDB, update the history state.
   useEffect(() => {
     if (newBuyHis) {
       const buyList = newBuyHis.map(his => {
@@ -39,6 +41,7 @@ const CenterPage = () => {
     }
   }, [newBuyHis, dispatch, products]);
 
+  // change the toggle target if the new one is not equal to previous one.
   const setToggleHandler = (title) => {
     setToggleTarget((prev) => {
       if (prev === title) {

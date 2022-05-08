@@ -13,6 +13,8 @@ const cartSlice = createSlice({
       const updatedItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
+      // if the target item already exist, adjust the amount.
+      // otherwise concat it to current array.
       if (updatedItemIndex >= 0) {
         state.cartItems[updatedItemIndex].amount += action.payload.amount;
       } else {

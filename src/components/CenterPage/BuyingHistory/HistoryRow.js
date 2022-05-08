@@ -10,10 +10,11 @@ const HistoryRow = ({ onDrop, setOnDrop, history }) => {
   const [dropdown, setDropdown] = useState(false);
 
   const toggleDropdownHandler = () => {
-    setDropdown((prev) => !prev);
+    setDropdown(true);
     setOnDrop(history.date);
   };
 
+  // auto close the dropdown if other history was opened.
   useEffect(() => {
     if (onDrop !== history.date) {
       setDropdown(false);
@@ -26,9 +27,7 @@ const HistoryRow = ({ onDrop, setOnDrop, history }) => {
   const buyDate = date.getDate();
 
   const buyList = history.items.map((item, index) => {
-    return (
-      <HistoryItem key={item.id} item={item} index={index} />
-    );
+    return <HistoryItem key={item.id} item={item} index={index} />;
   });
 
   return (

@@ -23,26 +23,30 @@ const ProfileContent = ({ isToggle }) => {
   };
   const [isEdit, setIsEdit] = useState(initialEditState);
 
-  // auto reset the profile data if user logged in.
+  // auto reset the profile data if user logged in (whenever the store state has changed).
   useEffect(() => {
     if (userProfile) {
       setProfile(userProfile);
     }
   }, [userProfile]);
 
+  // toggle the edit state of target input.
   const toggleIsEditHandler = (target) => {
     setIsEdit((prev) => ({ ...initialEditState, [target]: !prev[target] }));
   };
 
+  // change the state value based on current value of target input.
   const profileChangeHandler = (e, target) => {
     setProfile((prev) => ({ ...prev, [target]: e.target.value }));
   };
 
+  // reset store input values to initial status. (values from user pool)
   const resetProfileHandler = (target) => {
     dispatch(authActions.setProfile({ target, data: profile[target] }));
     toggleIsEditHandler(target);
   };
 
+  // reset the entire profile to store state.
   const cancelChangeHandler = (target) => {
     setProfile(userProfile);
     toggleIsEditHandler(target);

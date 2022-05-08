@@ -43,6 +43,7 @@ const reducer = (state, action) => {
 export const useCognito = () => {
   const [authState, dispatch] = useReducer(reducer, initialState);
 
+  // for handling sign-up, verify and log-in.
   const sendRequest = (type, data) => {
     if (type === "signup") {
       dispatch({ type: "SENDING" });
@@ -118,11 +119,13 @@ export const useCognito = () => {
     }
   };
 
+  // sign out the current user.
   const signOut = () => {
     userPool.getCurrentUser().signOut();
     dispatch({ type: "SUCCESS" });
   };
 
+  // set auth state to true if there's a valid user.
   const isAuthenticated = useCallback(() => {
     dispatch({ type: "SENDING" });
     const user = getAuthentiactedUser();
@@ -146,15 +149,14 @@ export const useCognito = () => {
   }, [dispatch]);
 
   return {
-    isAuth: authState.isAuth,
-    isLoading: authState.isLoading,
-    error: authState.error,
+    ...authState,
     sendRequest,
     signOut,
     isAuthenticated,
   };
 };
 
+// to get the id token of current user from browser storage.
 export const getIdToken = async () => {
   const idToken = getAuthentiactedUser().getSession((err, session) => {
     if (err) {
@@ -165,6 +167,7 @@ export const getIdToken = async () => {
   return idToken;
 };
 
+// to get the access token of current user from browser storage.
 export const getAccessToken = async () => {
   const user = getAuthentiactedUser();
   if (!user) {

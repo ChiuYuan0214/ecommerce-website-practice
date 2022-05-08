@@ -13,7 +13,7 @@ import styles from "./ShoppingCart.module.css";
 
 const ShoppingCart = ({ toggleCart }) => {
 
-  // custom hook used to add loading spinner and error message
+  // custom hook used to send request to DynamoDB (through API Gateway)
   const {isLoading, sendRequest} = useUserData();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -21,6 +21,7 @@ const ShoppingCart = ({ toggleCart }) => {
 
   const totalPrice = cartItems.reduce((sum, item) => {
     let discount = products.find((prod) => prod.id === item.id).discount;
+    // if no discount was set, set the price to 100%.
     if (!discount) {
       discount = 1;
     }
@@ -51,7 +52,9 @@ const ShoppingCart = ({ toggleCart }) => {
         return { ...item, discount };
       });
       sendRequest('buying', true, dataList);
+      // add cart items to buying history.
       dispatch(authActions.addBuyingHistory(dataList));
+      // reset cart.
       dispatch(cartActions.reset());
   };
 
@@ -85,7 +88,9 @@ const ShoppingCart = ({ toggleCart }) => {
         <h2>Total Price: NT$ {totalPrice.toFixed(0)}</h2>
         <div className={styles.actions}>
           <button onClick={cancelHandler}>Close</button>
-          <button disabled={cartItems.length === 0} onClick={confirmHandler}>Buy</button>
+          <button disabled={cartItems.length === 0} onClick={confirmHandler}>
+            Buy
+          </button>
         </div>
       </section>
     );

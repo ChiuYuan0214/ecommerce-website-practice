@@ -47,7 +47,6 @@ const AuthForm = () => {
     password.match(/[0-9]/g) === null ||
     password.match(/[a-z]/g) === null;
   const confirmPasswordInvalid = confirmPassword !== password;
-  console.log('confirmPasswordInvalid:', confirmPasswordInvalid)
   const emailInvalid = !email.includes("@");
   const phoneInvalid = phone.match(/[a-z]/gi) !== null;
   const birthInvalid = birth.trim().length === 0;
@@ -68,7 +67,7 @@ const AuthForm = () => {
     }
   }, [isAuth, dispatch]);
 
-  // only alert user some information after loading.
+  // only for alerting user some information after loading.
   useEffect(() => {
     if (isLoading) {
       return;
@@ -92,6 +91,7 @@ const AuthForm = () => {
     }
   }, [isLoading, error, stage, navigate]);
 
+  // toggle between login mode and signup mode.
   const toggleLoginHandler = () => {
     setIsLogin((prev) => !prev);
   };
@@ -108,6 +108,7 @@ const AuthForm = () => {
     }
     if (isLogin && isVerify) {
       sendRequest("confirm", { username: name, code: verCode });
+      // set isVerify to false to redirect user after verified successfully.
       setIsVerify(false);
       setStage("confirm");
     }

@@ -11,12 +11,20 @@ const CategoriesBlock = () => {
   const listRef = useRef();
   const navigate = useNavigate();
 
+  // change the category when hovered.
   const setCateHandler = (title) => {
     if (cate === title) {
       return;
     }
     setCate(title);
   };
+
+  // scroll the list into view whenever the target category has changed.
+  useEffect(() => {
+    if (cate) {
+      listRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [cate]);
 
   const btnList = cateList.map((cate) => (
     <li
@@ -49,12 +57,6 @@ const CategoriesBlock = () => {
       </ul>
     );
   };
-
-  useEffect(() => {
-    if (cate) {
-      listRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [cate]);
 
   return (
     <section className={styles.card}>
